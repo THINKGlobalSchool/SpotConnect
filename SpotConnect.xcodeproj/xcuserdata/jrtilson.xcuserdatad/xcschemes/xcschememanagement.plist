@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>ShareAction.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>SpotConnect.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -18,6 +23,11 @@
 			<true/>
 		</dict>
 		<key>1CC20BAB1AC5B5E500FD26E3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1CC20BBF1AC5C89600FD26E3</key>
 		<dict>
 			<key>primary</key>
 			<true/>

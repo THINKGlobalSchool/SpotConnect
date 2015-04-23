@@ -7,12 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1CA9F8471ACAFB6F003588EE /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 1CA9F8461ACAFB6F003588EE /* Cartfile */; };
+		1CA9F8481ACAFB6F003588EE /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 1CA9F8461ACAFB6F003588EE /* Cartfile */; };
+		1CA9F8491ACAFB6F003588EE /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 1CA9F8461ACAFB6F003588EE /* Cartfile */; };
+		1CA9F84D1ACB08DE003588EE /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA9F84A1ACB0294003588EE /* Alamofire.framework */; };
+		1CB7E0911AD6C82F0080A2AB /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CB7E0901AD6C82F0080A2AB /* AddressBook.framework */; };
+		1CB7E0931AD6C8430080A2AB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CB7E0921AD6C8430080A2AB /* SystemConfiguration.framework */; };
+		1CB7E0951AD6C8AE0080A2AB /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CB7E0941AD6C8AE0080A2AB /* GoogleSignIn.framework */; };
+		1CB7E0961AD6CCB00080A2AB /* GoogleSignIn.framework in Resources */ = {isa = PBXBuildFile; fileRef = 1CB7E0941AD6C8AE0080A2AB /* GoogleSignIn.framework */; };
+		1CB7E09B1AD70C5E0080A2AB /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1CB7E09A1AD70C5E0080A2AB /* GoogleSignIn.bundle */; };
+		1CB7E09F1AE043E70080A2AB /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CB7E09E1AE043E70080A2AB /* SwiftyJSON.framework */; };
+		1CB7E0A21AE04C460080A2AB /* Locksmith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB7E0A01AE04C460080A2AB /* Locksmith.swift */; };
+		1CB7E0A31AE04C460080A2AB /* Locksmith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB7E0A01AE04C460080A2AB /* Locksmith.swift */; };
+		1CB7E0A41AE04C460080A2AB /* LocksmithRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB7E0A11AE04C460080A2AB /* LocksmithRequest.swift */; };
+		1CB7E0A51AE04C460080A2AB /* LocksmithRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB7E0A11AE04C460080A2AB /* LocksmithRequest.swift */; };
+		1CB7E0A71AE04E920080A2AB /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB7E0A61AE04E920080A2AB /* StatusViewController.swift */; };
+		1CB7E0AA1AE153470080A2AB /* UIViewControllerUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB7E0A91AE153470080A2AB /* UIViewControllerUtilities.swift */; };
+		1CB7E0AB1AE153470080A2AB /* UIViewControllerUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB7E0A91AE153470080A2AB /* UIViewControllerUtilities.swift */; };
+		1CB7E0AD1AE540160080A2AB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC20B9E1AC5B5E500FD26E3 /* LoginViewController.swift */; };
+		1CB7E0AF1AE821570080A2AB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1CB7E0AE1AE821570080A2AB /* Settings.bundle */; };
+		1CB7E0B01AE821570080A2AB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1CB7E0AE1AE821570080A2AB /* Settings.bundle */; };
+		1CB7E0B11AE821570080A2AB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1CB7E0AE1AE821570080A2AB /* Settings.bundle */; };
 		1CC20B9D1AC5B5E500FD26E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC20B9C1AC5B5E500FD26E3 /* AppDelegate.swift */; };
-		1CC20B9F1AC5B5E500FD26E3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC20B9E1AC5B5E500FD26E3 /* ViewController.swift */; };
 		1CC20BA21AC5B5E500FD26E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CC20BA01AC5B5E500FD26E3 /* Main.storyboard */; };
 		1CC20BA41AC5B5E500FD26E3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CC20BA31AC5B5E500FD26E3 /* Images.xcassets */; };
 		1CC20BA71AC5B5E500FD26E3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CC20BA51AC5B5E500FD26E3 /* LaunchScreen.xib */; };
 		1CC20BB31AC5B5E500FD26E3 /* SpotConnectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC20BB21AC5B5E500FD26E3 /* SpotConnectTests.swift */; };
+		1CC20BC51AC5C89600FD26E3 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC20BC41AC5C89600FD26E3 /* ShareViewController.swift */; };
+		1CC20BC71AC5C89600FD26E3 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CC20BC61AC5C89600FD26E3 /* MainInterface.storyboard */; };
+		1CC20BCA1AC5C89600FD26E3 /* ShareAction.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1CC20BC01AC5C89600FD26E3 /* ShareAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,19 +46,59 @@
 			remoteGlobalIDString = 1CC20B961AC5B5E500FD26E3;
 			remoteInfo = SpotConnect;
 		};
+		1CC20BC81AC5C89600FD26E3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1CC20B8F1AC5B5E500FD26E3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1CC20BBF1AC5C89600FD26E3;
+			remoteInfo = ShareAction;
+		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		1CC20BCE1AC5C89600FD26E3 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				1CC20BCA1AC5C89600FD26E3 /* ShareAction.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		1CA9F8461ACAFB6F003588EE /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
+		1CA9F84A1ACB0294003588EE /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		1CB7E0901AD6C82F0080A2AB /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		1CB7E0921AD6C8430080A2AB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		1CB7E0941AD6C8AE0080A2AB /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignIn.framework; sourceTree = "<group>"; };
+		1CB7E0971AD6CD4D0080A2AB /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		1CB7E09A1AD70C5E0080A2AB /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleSignIn.bundle; sourceTree = "<group>"; };
+		1CB7E09E1AE043E70080A2AB /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		1CB7E0A01AE04C460080A2AB /* Locksmith.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locksmith.swift; sourceTree = "<group>"; };
+		1CB7E0A11AE04C460080A2AB /* LocksmithRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocksmithRequest.swift; sourceTree = "<group>"; };
+		1CB7E0A61AE04E920080A2AB /* StatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
+		1CB7E0A91AE153470080A2AB /* UIViewControllerUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerUtilities.swift; sourceTree = "<group>"; };
+		1CB7E0AE1AE821570080A2AB /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		1CC20B971AC5B5E500FD26E3 /* SpotConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpotConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CC20B9B1AC5B5E500FD26E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1CC20B9C1AC5B5E500FD26E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1CC20B9E1AC5B5E500FD26E3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1CC20B9E1AC5B5E500FD26E3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1CC20BA11AC5B5E500FD26E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1CC20BA31AC5B5E500FD26E3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1CC20BA61AC5B5E500FD26E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		1CC20BAC1AC5B5E500FD26E3 /* SpotConnectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpotConnectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CC20BB11AC5B5E500FD26E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1CC20BB21AC5B5E500FD26E3 /* SpotConnectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotConnectTests.swift; sourceTree = "<group>"; };
+		1CC20BC01AC5C89600FD26E3 /* ShareAction.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ShareAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CC20BC31AC5C89600FD26E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1CC20BC41AC5C89600FD26E3 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		1CC20BC61AC5C89600FD26E3 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		1CC20BCF1AC5C8E700FD26E3 /* ShareAction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ShareAction.entitlements; sourceTree = "<group>"; };
+		1CC20BD01AC5C92600FD26E3 /* SpotConnect.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SpotConnect.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,10 +106,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CB7E0931AD6C8430080A2AB /* SystemConfiguration.framework in Frameworks */,
+				1CB7E0911AD6C82F0080A2AB /* AddressBook.framework in Frameworks */,
+				1CA9F84D1ACB08DE003588EE /* Alamofire.framework in Frameworks */,
+				1CB7E09F1AE043E70080A2AB /* SwiftyJSON.framework in Frameworks */,
+				1CB7E0951AD6C8AE0080A2AB /* GoogleSignIn.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		1CC20BA91AC5B5E500FD26E3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1CC20BBD1AC5C89600FD26E3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -59,9 +134,16 @@
 		1CC20B8E1AC5B5E500FD26E3 = {
 			isa = PBXGroup;
 			children = (
+				1CB7E09E1AE043E70080A2AB /* SwiftyJSON.framework */,
+				1CB7E0971AD6CD4D0080A2AB /* Bridging-Header.h */,
+				1CB7E0921AD6C8430080A2AB /* SystemConfiguration.framework */,
+				1CB7E0901AD6C82F0080A2AB /* AddressBook.framework */,
+				1CA9F84A1ACB0294003588EE /* Alamofire.framework */,
 				1CC20B991AC5B5E500FD26E3 /* SpotConnect */,
 				1CC20BAF1AC5B5E500FD26E3 /* SpotConnectTests */,
+				1CC20BC11AC5C89600FD26E3 /* ShareAction */,
 				1CC20B981AC5B5E500FD26E3 /* Products */,
+				1CA9F8461ACAFB6F003588EE /* Cartfile */,
 			);
 			sourceTree = "<group>";
 		};
@@ -70,6 +152,7 @@
 			children = (
 				1CC20B971AC5B5E500FD26E3 /* SpotConnect.app */,
 				1CC20BAC1AC5B5E500FD26E3 /* SpotConnectTests.xctest */,
+				1CC20BC01AC5C89600FD26E3 /* ShareAction.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -77,12 +160,18 @@
 		1CC20B991AC5B5E500FD26E3 /* SpotConnect */ = {
 			isa = PBXGroup;
 			children = (
+				1CC20BD01AC5C92600FD26E3 /* SpotConnect.entitlements */,
 				1CC20B9C1AC5B5E500FD26E3 /* AppDelegate.swift */,
-				1CC20B9E1AC5B5E500FD26E3 /* ViewController.swift */,
+				1CC20B9E1AC5B5E500FD26E3 /* LoginViewController.swift */,
 				1CC20BA01AC5B5E500FD26E3 /* Main.storyboard */,
 				1CC20BA31AC5B5E500FD26E3 /* Images.xcassets */,
 				1CC20BA51AC5B5E500FD26E3 /* LaunchScreen.xib */,
+				1CB7E0A01AE04C460080A2AB /* Locksmith.swift */,
+				1CB7E0A11AE04C460080A2AB /* LocksmithRequest.swift */,
+				1CB7E0A61AE04E920080A2AB /* StatusViewController.swift */,
+				1CB7E0A91AE153470080A2AB /* UIViewControllerUtilities.swift */,
 				1CC20B9A1AC5B5E500FD26E3 /* Supporting Files */,
+				1CB7E0AE1AE821570080A2AB /* Settings.bundle */,
 			);
 			path = SpotConnect;
 			sourceTree = "<group>";
@@ -90,6 +179,8 @@
 		1CC20B9A1AC5B5E500FD26E3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1CB7E09A1AD70C5E0080A2AB /* GoogleSignIn.bundle */,
+				1CB7E0941AD6C8AE0080A2AB /* GoogleSignIn.framework */,
 				1CC20B9B1AC5B5E500FD26E3 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -112,6 +203,25 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		1CC20BC11AC5C89600FD26E3 /* ShareAction */ = {
+			isa = PBXGroup;
+			children = (
+				1CC20BCF1AC5C8E700FD26E3 /* ShareAction.entitlements */,
+				1CC20BC41AC5C89600FD26E3 /* ShareViewController.swift */,
+				1CC20BC61AC5C89600FD26E3 /* MainInterface.storyboard */,
+				1CC20BC21AC5C89600FD26E3 /* Supporting Files */,
+			);
+			path = ShareAction;
+			sourceTree = "<group>";
+		};
+		1CC20BC21AC5C89600FD26E3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1CC20BC31AC5C89600FD26E3 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -122,10 +232,13 @@
 				1CC20B931AC5B5E500FD26E3 /* Sources */,
 				1CC20B941AC5B5E500FD26E3 /* Frameworks */,
 				1CC20B951AC5B5E500FD26E3 /* Resources */,
+				1CC20BCE1AC5C89600FD26E3 /* Embed App Extensions */,
+				1CA9F84E1ACB08E7003588EE /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				1CC20BC91AC5C89600FD26E3 /* PBXTargetDependency */,
 			);
 			name = SpotConnect;
 			productName = SpotConnect;
@@ -150,6 +263,23 @@
 			productReference = 1CC20BAC1AC5B5E500FD26E3 /* SpotConnectTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		1CC20BBF1AC5C89600FD26E3 /* ShareAction */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1CC20BCB1AC5C89600FD26E3 /* Build configuration list for PBXNativeTarget "ShareAction" */;
+			buildPhases = (
+				1CC20BBC1AC5C89600FD26E3 /* Sources */,
+				1CC20BBD1AC5C89600FD26E3 /* Frameworks */,
+				1CC20BBE1AC5C89600FD26E3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ShareAction;
+			productName = ShareAction;
+			productReference = 1CC20BC01AC5C89600FD26E3 /* ShareAction.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -161,10 +291,31 @@
 				TargetAttributes = {
 					1CC20B961AC5B5E500FD26E3 = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 4B5XWX34W2;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					1CC20BAB1AC5B5E500FD26E3 = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 1CC20B961AC5B5E500FD26E3;
+					};
+					1CC20BBF1AC5C89600FD26E3 = {
+						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 4B5XWX34W2;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -183,6 +334,7 @@
 			targets = (
 				1CC20B961AC5B5E500FD26E3 /* SpotConnect */,
 				1CC20BAB1AC5B5E500FD26E3 /* SpotConnectTests */,
+				1CC20BBF1AC5C89600FD26E3 /* ShareAction */,
 			);
 		};
 /* End PBXProject section */
@@ -192,9 +344,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CB7E0961AD6CCB00080A2AB /* GoogleSignIn.framework in Resources */,
 				1CC20BA21AC5B5E500FD26E3 /* Main.storyboard in Resources */,
 				1CC20BA71AC5B5E500FD26E3 /* LaunchScreen.xib in Resources */,
+				1CA9F8471ACAFB6F003588EE /* Cartfile in Resources */,
+				1CB7E09B1AD70C5E0080A2AB /* GoogleSignIn.bundle in Resources */,
 				1CC20BA41AC5B5E500FD26E3 /* Images.xcassets in Resources */,
+				1CB7E0AF1AE821570080A2AB /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,17 +358,51 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CB7E0B01AE821570080A2AB /* Settings.bundle in Resources */,
+				1CA9F8481ACAFB6F003588EE /* Cartfile in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1CC20BBE1AC5C89600FD26E3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CA9F8491ACAFB6F003588EE /* Cartfile in Resources */,
+				1CB7E0B11AE821570080A2AB /* Settings.bundle in Resources */,
+				1CC20BC71AC5C89600FD26E3 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1CA9F84E1ACB08E7003588EE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1CC20B931AC5B5E500FD26E3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1CC20B9F1AC5B5E500FD26E3 /* ViewController.swift in Sources */,
+				1CB7E0AD1AE540160080A2AB /* LoginViewController.swift in Sources */,
+				1CB7E0A71AE04E920080A2AB /* StatusViewController.swift in Sources */,
+				1CB7E0A41AE04C460080A2AB /* LocksmithRequest.swift in Sources */,
+				1CB7E0A21AE04C460080A2AB /* Locksmith.swift in Sources */,
+				1CB7E0AA1AE153470080A2AB /* UIViewControllerUtilities.swift in Sources */,
 				1CC20B9D1AC5B5E500FD26E3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -225,6 +415,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1CC20BBC1AC5C89600FD26E3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CB7E0A31AE04C460080A2AB /* Locksmith.swift in Sources */,
+				1CB7E0A51AE04C460080A2AB /* LocksmithRequest.swift in Sources */,
+				1CB7E0AB1AE153470080A2AB /* UIViewControllerUtilities.swift in Sources */,
+				1CC20BC51AC5C89600FD26E3 /* ShareViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -232,6 +433,11 @@
 			isa = PBXTargetDependency;
 			target = 1CC20B961AC5B5E500FD26E3 /* SpotConnect */;
 			targetProxy = 1CC20BAD1AC5B5E500FD26E3 /* PBXContainerItemProxy */;
+		};
+		1CC20BC91AC5C89600FD26E3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1CC20BBF1AC5C89600FD26E3 /* ShareAction */;
+			targetProxy = 1CC20BC81AC5C89600FD26E3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -338,9 +544,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SpotConnect/SpotConnect.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/SpotConnect",
+				);
 				INFOPLIST_FILE = SpotConnect/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -348,9 +567,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SpotConnect/SpotConnect.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/SpotConnect",
+				);
 				INFOPLIST_FILE = SpotConnect/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -388,6 +620,46 @@
 			};
 			name = Release;
 		};
+		1CC20BCC1AC5C89600FD26E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ShareAction/ShareAction.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ShareAction/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		1CC20BCD1AC5C89600FD26E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ShareAction/ShareAction.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = ShareAction/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -407,6 +679,7 @@
 				1CC20BB81AC5B5E500FD26E3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1CC20BB91AC5B5E500FD26E3 /* Build configuration list for PBXNativeTarget "SpotConnectTests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +688,16 @@
 				1CC20BBB1AC5B5E500FD26E3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1CC20BCB1AC5C89600FD26E3 /* Build configuration list for PBXNativeTarget "ShareAction" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1CC20BCC1AC5C89600FD26E3 /* Debug */,
+				1CC20BCD1AC5C89600FD26E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

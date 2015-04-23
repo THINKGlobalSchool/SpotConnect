@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="nfB-BS-ERI">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="SpotConnect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,11 +15,160 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lqG-bR-QfY">
+                                <rect key="frame" x="125" y="125" width="350" height="350"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Sign in to Spot" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FK6-TM-Ylq">
+                                        <rect key="frame" x="81" y="0.0" width="188" height="74"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="jtilson" borderStyle="roundedRect" placeholder="Username or Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ifm-77-u2O">
+                                        <rect key="frame" x="75" y="94" width="200" height="30"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="qLl-HL-2YL"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="jtilson" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wls-ft-yJj">
+                                        <rect key="frame" x="75" y="132" width="200" height="30"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="jcu-mo-M1U"/>
+                                        </connections>
+                                    </textField>
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="swz-8P-ihT" customClass="GIDSignInButton">
+                                        <rect key="frame" x="75" y="279" width="200" height="39"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gcx-O7-Sma" userLabel="horizLine">
+                                        <rect key="frame" x="75" y="242" width="200" height="1"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GnR-u1-Nt9">
+                                        <rect key="frame" x="138" y="183" width="75" height="30"/>
+                                        <state key="normal" title="Sign In"/>
+                                        <connections>
+                                            <action selector="spotSignInAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8sr-j4-VtD"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="GnR-u1-Nt9" firstAttribute="top" secondItem="Wls-ft-yJj" secondAttribute="bottom" constant="30" id="Db5-jk-6xk"/>
+                                    <constraint firstItem="Ifm-77-u2O" firstAttribute="top" secondItem="FK6-TM-Ylq" secondAttribute="bottom" constant="30" id="ave-F6-A5R"/>
+                                    <constraint firstItem="FK6-TM-Ylq" firstAttribute="top" secondItem="lqG-bR-QfY" secondAttribute="top" constant="30" id="ccO-T6-h32"/>
+                                    <constraint firstItem="Wls-ft-yJj" firstAttribute="top" secondItem="Ifm-77-u2O" secondAttribute="bottom" constant="15" id="hnN-T9-HFq"/>
+                                    <constraint firstAttribute="bottom" secondItem="gcx-O7-Sma" secondAttribute="bottom" constant="100" id="k7S-vR-bBy"/>
+                                    <constraint firstAttribute="bottom" secondItem="swz-8P-ihT" secondAttribute="bottom" constant="35" id="xrv-rT-qYH"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="5"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.74982244320000002" green="0.015072040700000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="lqG-bR-QfY" secondAttribute="centerX" id="Er1-KL-nvT"/>
+                            <constraint firstAttribute="centerY" secondItem="lqG-bR-QfY" secondAttribute="centerY" id="bL4-dz-YfR"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="signInButton" destination="swz-8P-ihT" id="8fG-Yt-uyc"/>
+                        <outlet property="spotPassword" destination="Wls-ft-yJj" id="P4U-vH-tjr"/>
+                        <outlet property="spotSignIn" destination="GnR-u1-Nt9" id="IqD-YB-83L"/>
+                        <outlet property="spotUsername" destination="Ifm-77-u2O" id="Exc-qa-alz"/>
+                        <segue destination="o41-PT-FTX" kind="unwind" identifier="unwindToStatusSegue" unwindAction="unwindToStatus:" id="WZv-qu-iRt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="o41-PT-FTX" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
+            <point key="canvasLocation" x="1313" y="917"/>
+        </scene>
+        <!--Status View Controller-->
+        <scene sceneID="oO8-bR-9Ax">
+            <objects>
+                <viewController id="nfB-BS-ERI" customClass="StatusViewController" customModule="SpotConnect" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZfA-Dd-nPH"/>
+                        <viewControllerLayoutGuide type="bottom" id="B1Z-1b-Cub"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Xg3-hr-BSK">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eSn-FB-Iqe">
+                                <rect key="frame" x="125" y="125" width="350" height="350"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UwW-la-uIj">
+                                        <rect key="frame" x="100" y="23" width="150" height="150"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="AsD-fk-Hoh"/>
+                                            <constraint firstAttribute="height" constant="150" id="NXw-ac-Grc"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhM-13-aWb">
+                                        <rect key="frame" x="33" y="188" width="284" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NlL-AT-pVR">
+                                        <rect key="frame" x="140" y="312" width="70" height="30"/>
+                                        <state key="normal" title="Sign Out">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="spotSignOutAction:" destination="nfB-BS-ERI" eventType="touchUpInside" id="ZpH-sq-pyD"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NVL-fc-CUg">
+                                        <rect key="frame" x="25" y="226" width="300" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="rhM-13-aWb" firstAttribute="top" secondItem="UwW-la-uIj" secondAttribute="bottom" constant="20" id="9nj-d8-7iq"/>
+                                    <constraint firstAttribute="bottom" secondItem="NlL-AT-pVR" secondAttribute="bottom" constant="10" id="BKr-sG-6V7"/>
+                                    <constraint firstItem="NVL-fc-CUg" firstAttribute="top" secondItem="rhM-13-aWb" secondAttribute="bottom" constant="15" id="T6O-zK-X5P"/>
+                                    <constraint firstItem="UwW-la-uIj" firstAttribute="top" secondItem="eSn-FB-Iqe" secondAttribute="top" constant="30" id="lEQ-bp-E74"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="5"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.74982244320000002" green="0.015072040700000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="eSn-FB-Iqe" secondAttribute="centerX" id="7cs-gW-1uT"/>
+                            <constraint firstAttribute="centerY" secondItem="eSn-FB-Iqe" secondAttribute="centerY" id="UbS-Bq-ZtP"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="spotUserEmail" destination="NVL-fc-CUg" id="IAg-P0-Oww"/>
+                        <outlet property="spotUserInfoContainer" destination="eSn-FB-Iqe" id="Fy5-Fh-mQR"/>
+                        <outlet property="spotUserName" destination="rhM-13-aWb" id="GPF-aQ-ers"/>
+                        <outlet property="spotUserPicture" destination="UwW-la-uIj" id="YRD-Db-Roe"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="ShowLoginSegue" id="pgb-k4-Nfj"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="ShowLoginSignoutSegue" id="CHJ-gC-QJM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qco-84-azA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="621" y="917"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="CHJ-gC-QJM"/>
+    </inferredMetricsTieBreakers>
 </document>
