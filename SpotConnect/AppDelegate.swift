@@ -12,11 +12,22 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
+        
+        let version: AnyObject? = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString")
+        NSUserDefaults.standardUserDefaults().setObject(version, forKey: "version_preference")
+        
+        let build: AnyObject? = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleVersion")
+        NSUserDefaults.standardUserDefaults().setObject(build, forKey: "build_preference")
+        
+        let githash: AnyObject? = NSBundle.mainBundle().objectForInfoDictionaryKey("GITHash")
+        NSUserDefaults.standardUserDefaults().setObject(githash, forKey: "githash_preference")
+        
+        
         return true
     }
 

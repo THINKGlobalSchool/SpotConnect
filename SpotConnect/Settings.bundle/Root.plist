@@ -5,6 +5,42 @@
 	<key>PreferenceSpecifiers</key>
 	<array>
 		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Info</string>
+		</dict>
+        <dict>
+            <key>Type</key>
+            <string>PSTitleValueSpecifier</string>
+            <key>Title</key>
+            <string>Version</string>
+            <key>Key</key>
+            <string>version_preference</string>
+            <key>DefaultValue</key>
+            <string>-</string>
+        </dict>
+        <dict>
+            <key>Type</key>
+            <string>PSTitleValueSpecifier</string>
+            <key>Title</key>
+            <string>Build</string>
+            <key>Key</key>
+            <string>build_preference</string>
+            <key>DefaultValue</key>
+            <string>-</string>
+        </dict>
+        <dict>
+            <key>Type</key>
+            <string>PSTitleValueSpecifier</string>
+            <key>Title</key>
+            <string>Git</string>
+            <key>Key</key>
+            <string>githash_preference</string>
+            <key>DefaultValue</key>
+            <string>-</string>
+        </dict>
+		<dict>
 			<key>Title</key>
 			<string>API Settings</string>
 			<key>Type</key>

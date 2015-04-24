@@ -237,6 +237,8 @@
 				1CC20B951AC5B5E500FD26E3 /* Resources */,
 				1CC20BCE1AC5C89600FD26E3 /* Embed App Extensions */,
 				1CA9F84E1ACB08E7003588EE /* ShellScript */,
+				1CC3DF431AEAC46D003E4F1C /* ShellScript */,
+				1CC3DF441AEAC555003E4F1C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -394,6 +396,32 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		1CC3DF431AEAC46D003E4F1C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/xcode-git-hash.sh\"\n";
+		};
+		1CC3DF441AEAC555003E4F1C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
