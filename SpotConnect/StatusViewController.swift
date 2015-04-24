@@ -28,9 +28,9 @@ class StatusViewController: UIViewController {
     let sharedDefaults = NSUserDefaults(suiteName: "group.thinkglobalschool.ExtensionSharingDefaults")
     let userDefaults = NSUserDefaults.standardUserDefaults()
     
-    // Spot API constants
-    let spotApiKey = NSUserDefaults.standardUserDefaults().stringForKey("api_key_preference")!
-    let spotApiUrl = NSUserDefaults.standardUserDefaults().stringForKey("api_endpoint_preference")!
+    // Spot API vars
+    var spotApiKey: String = ""
+    var spotApiUrl: String = ""
     
     // Image cache
     var imageCache = [String:UIImage]()
@@ -39,34 +39,55 @@ class StatusViewController: UIViewController {
     var infoCache = [String:String]()
     
     // MARK: UIViewController
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // This is sucky.. copying the key and url into the shared defaults so the
-        // share extension can access them
-        self.sharedDefaults?.setObject(self.spotApiKey, forKey: "api_key_preference")
-        self.sharedDefaults?.setObject(self.spotApiUrl, forKey: "api_endpoint_preference")
-        self.sharedDefaults?.synchronize()
-    }
-    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-
-        let (spotAuthDictionary, spotDictionaryError) = Locksmith.loadDataForUserAccount("spotUser")
-
-        // Check for stored user/token info
-        if (spotDictionaryError == nil && spotAuthDictionary != nil) {
-            if let accessToken = spotAuthDictionary?["spot_access_token"] as? NSString {
-                self.sharedDefaults?.setObject(accessToken, forKey: "spot_access_token")
-                self.sharedDefaults?.synchronize()
-                
-                // Populate user info
-                spotApiGetUserProfile()                
-            }
-           
+        
+        var apiSettingsAvailable = false
+        
+        if let apiKey = NSUserDefaults.standardUserDefaults().stringForKey("api_key_preference") {
+            self.spotApiKey = apiKey
+            apiSettingsAvailable = true
         } else {
-            // No info! Segue to the login page
-            performSegueWithIdentifier("ShowLoginSegue", sender: self)
+            apiSettingsAvailable = false
+            let alertController = UIAlertController(title: "Error", message:
+                "No API Key has been supplied in the app settings", preferredStyle: UIAlertControllerStyle.Alert)
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+        
+        if let apiUrl = NSUserDefaults.standardUserDefaults().stringForKey("api_endpoint_preference") {
+            self.spotApiUrl = apiUrl
+            apiSettingsAvailable = true
+        } else {
+            apiSettingsAvailable = false
+            let alertController = UIAlertController(title: "Error", message:
+                "No API URL has been supplied in the app settings", preferredStyle: UIAlertControllerStyle.Alert)
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+        
+        if (apiSettingsAvailable) {
+            // This is sucky.. copying the key and url into the shared defaults so the
+            // share extension can access them
+            self.sharedDefaults?.setObject(self.spotApiKey, forKey: "api_key_preference")
+            self.sharedDefaults?.setObject(self.spotApiUrl, forKey: "api_endpoint_preference")
+            self.sharedDefaults?.synchronize()
+            
+            
+            let (spotAuthDictionary, spotDictionaryError) = Locksmith.loadDataForUserAccount("spotUser")
+            
+            // Check for stored user/token info
+            if (spotDictionaryError == nil && spotAuthDictionary != nil) {
+                if let accessToken = spotAuthDictionary?["spot_access_token"] as? NSString {
+                    self.sharedDefaults?.setObject(accessToken, forKey: "spot_access_token")
+                    self.sharedDefaults?.synchronize()
+                    
+                    // Populate user info
+                    spotApiGetUserProfile()
+                }
+                
+            } else {
+                // No info! Segue to the login page
+                performSegueWithIdentifier("ShowLoginSegue", sender: self)
+            }
         }
     }
 

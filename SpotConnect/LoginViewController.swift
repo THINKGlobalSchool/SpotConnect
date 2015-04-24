@@ -39,7 +39,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
 
         // Set up Google Sign In
         signIn = GIDSignIn.sharedInstance()
-        signIn?.clientID = "96486200889-cnkki5c8stmbctbn2p3mvv8s1no4qicp"
+        signIn?.clientID = "96486200889-cnkki5c8stmbctbn2p3mvv8s1no4qicp.apps.googleusercontent.com"
         signIn?.shouldFetchBasicProfile = true
         signIn?.delegate = self
         
@@ -89,7 +89,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
                 "api_key": spotApiKey
             ]
             
-            Alamofire.request(.POST, endpoint, parameters: parameters, encoding: .JSON)
+            Alamofire.request(.POST, endpoint, parameters: parameters, encoding: .URL)
                 .responseJSON{ (request, response, data, error) in
                     var json = JSON(data!)
                     
@@ -111,6 +111,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
                         }
                     } else {
                         self.showMessage("Error", dismiss: "Dismiss", message: json["message"].stringValue)
+                        self.signIn?.disconnect() // Disconnect the user that just authorized
                     }
             }
         }
@@ -122,14 +123,14 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         
         // Lets try signing in..
         let endpoint = spotApiUrl + "auth.get_user_pass_auth_token"
-        
+
         let parameters = [
             "username": self.spotUsername.text,
             "password": self.spotPassword.text,
             "api_key": spotApiKey
         ]
 
-        Alamofire.request(.POST, endpoint, parameters: parameters, encoding: .JSON)
+        Alamofire.request(.POST, endpoint, parameters: parameters, encoding: .URL)
             .responseJSON{ (request, response, data, error) in
                 if (error == nil) {
                     var json = JSON(data!)

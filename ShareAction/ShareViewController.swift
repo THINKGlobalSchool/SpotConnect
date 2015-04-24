@@ -21,15 +21,20 @@ class ShareViewController: SLComposeServiceViewController {
     let spotApiUrl = NSUserDefaults(suiteName: "group.thinkglobalschool.ExtensionSharingDefaults")!.stringForKey("api_endpoint_preference")!
     
     let sharedDefaults = NSUserDefaults(suiteName: "group.thinkglobalschool.ExtensionSharingDefaults")
-
+    
+    // Items that can be shared
+    var postUrl: NSURL?
+    var postText: String?
+    var postError: NSError?
+    
     // MARK: - SLComposeServiceViewController
-
+    
     // Perform tasks when the view is loaded
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.hidden = true
-        
+
         // Check for access token
         if let accessToken = self.sharedDefaults?.objectForKey("spot_access_token") as? NSString {
             // Good, got a token. Let's check if we can talk to the server
@@ -107,33 +112,86 @@ class ShareViewController: SLComposeServiceViewController {
         return true
     }
 
+    // Called when the view is finished presenting
+    override func presentationAnimationDidFinish() {
+        // Get item provider
+        var item : NSExtensionItem = self.extensionContext?.inputItems.first as! NSExtensionItem
+
+        // Got more than one, this will be fun!
+        for provider in item.attachments! {
+            let itemProvider = provider as! NSItemProvider
+                self.setPostContent(itemProvider)
+            }
+    }
+    
+    func setPostContent(itemProvider: NSItemProvider) -> Void {
+        // Need to figure out what we're going to be posting, this is in decending order of importance
+        var validTypes = [
+            kUTTypePropertyList as String, // Propertly list, as returned by preprocessing JS (not currently in use)
+            kUTTypeURL as String,          // "public.url"
+            kUTTypeText as String,         // "public.text"
+            kUTTypePlainText as String     // "public.plain-text"
+        ]
+        
+        for type in validTypes {
+            if (itemProvider.hasItemConformingToTypeIdentifier(type)) {
+                itemProvider.loadItemForTypeIdentifier(type, options: nil, completionHandler: { (item, error) -> Void in
+                    if let url = item as? NSURL {
+                        // Got a URL
+                        self.postUrl = url
+                    } else if let text = item as? String {
+                        // Got text, but check to see what UTI type we were expecting
+                        if type == kUTTypeURL as String {
+                            // We've been told that this conforms to the public.url type, but we got a string? 
+                            // (I'm looking at you Pocket)
+                            // Fail for now..
+                            self.postError = NSError(domain: "SpotConnect", code: -42, userInfo: [NSLocalizedDescriptionKey: "This app isn't providing the data we were told to expect from it. We won't be able to post from this app."])
+
+                        } else {
+                            // Got some text, as we should
+                            self.postText = text
+                        }
+                    }
+                })
+            }
+        }
+    }
+
     // This is called after the user selects Post. Do the upload of contentText and/or NSExtensionContext attachments.
     override func didSelectPost() {
-        // Get the access token from shared defaults
-        self.sharedDefaults?.synchronize()
-        if let accessToken = self.sharedDefaults?.objectForKey("spot_access_token") as? NSString {
-           
-            // Get item provider
-            var item : NSExtensionItem = self.extensionContext?.inputItems[0] as! NSExtensionItem
+        
+        // Check if we got any usable data
+        if self.postUrl == nil && self.postText == nil {
+            // Nope..
+            self.postError = NSError(domain: "SpotConnect", code: -43, userInfo: [NSLocalizedDescriptionKey: "This app isn't providing any usable data!"])
+        }
+        
+       
+        // Check if we generated an error trying to set post data
+        if (self.postError != nil) {
+            let alertController = UIAlertController(title: "Uh-oh", message:
+                self.postError?.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
             
-            var itemProvider: NSItemProvider = item.attachments?.last as! NSItemProvider
-
-            // If we support a URL
-            if (itemProvider.hasItemConformingToTypeIdentifier("public.url")) {
-                itemProvider.loadItemForTypeIdentifier("public.url", options: nil, completionHandler: { (urlItem, error) -> Void in
-                    if let url = urlItem as? NSURL {
-                        // Finally.. got the URL. Lets post the bookmark
-                        self.postBookmark(self.contentText as String, url: url, token: accessToken)
-                    }
-                })
-            } else if (itemProvider.hasItemConformingToTypeIdentifier("public.text")) {
-                // Support just text
-                itemProvider.loadItemForTypeIdentifier("public.text", options: nil, completionHandler: { (item, error) -> Void in
-                    if let text = item as? String {
-                        // Make a wire post
-                        self.postWire(text, token: accessToken)
-                    }
-                })
+            alertController.addAction(UIAlertAction(title: "Ok :(", style: UIAlertActionStyle.Default, handler: { action in
+                self.completeExtension()
+            }))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+        } else {
+            // Get the access token from shared defaults
+            self.sharedDefaults?.synchronize()
+            
+            // Load in access token to make posts
+            if let accessToken = self.sharedDefaults?.objectForKey("spot_access_token") as? NSString {
+                
+                // Check what we're going to post
+                if let url = self.postUrl {
+                    // Got a url, post a bookmark
+                    self.postBookmark(self.contentText as String, url: url, token: accessToken)
+                } else if let text = self.postText {
+                    // Got text
+                    self.postWire(text, token: accessToken)
+                }
             }
         }
     }
@@ -167,7 +225,7 @@ class ShareViewController: SLComposeServiceViewController {
         var message: String = ""
         var title: String = ""
         
-        Alamofire.request(.POST, endpoint, parameters: post_parameters, encoding: .JSON)
+        Alamofire.request(.POST, endpoint, parameters: post_parameters, encoding: .URL)
             .responseJSON{ (request, response, data, error) in
                 // Check for errors
                 if (error != nil) {
@@ -221,7 +279,7 @@ class ShareViewController: SLComposeServiceViewController {
         var message: String = ""
         var title: String = ""
         
-        Alamofire.request(.POST, endpoint, parameters: post_parameters, encoding: .JSON)
+        Alamofire.request(.POST, endpoint, parameters: post_parameters, encoding: .URL)
             .responseJSON{ (request, response, data, error) in
                 // Check for errors
                 if (error != nil) {

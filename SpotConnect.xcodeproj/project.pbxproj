@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C3A58211AEA89DB0027ED94 /* SpotConnect.js in Resources */ = {isa = PBXBuildFile; fileRef = 1C3A58201AEA89DB0027ED94 /* SpotConnect.js */; };
 		1CA9F8471ACAFB6F003588EE /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 1CA9F8461ACAFB6F003588EE /* Cartfile */; };
 		1CA9F8481ACAFB6F003588EE /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 1CA9F8461ACAFB6F003588EE /* Cartfile */; };
 		1CA9F8491ACAFB6F003588EE /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 1CA9F8461ACAFB6F003588EE /* Cartfile */; };
@@ -70,6 +71,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1C3A58201AEA89DB0027ED94 /* SpotConnect.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = SpotConnect.js; sourceTree = "<group>"; };
 		1CA9F8461ACAFB6F003588EE /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		1CA9F84A1ACB0294003588EE /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		1CB7E0901AD6C82F0080A2AB /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -217,6 +219,7 @@
 		1CC20BC21AC5C89600FD26E3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1C3A58201AEA89DB0027ED94 /* SpotConnect.js */,
 				1CC20BC31AC5C89600FD26E3 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -367,6 +370,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C3A58211AEA89DB0027ED94 /* SpotConnect.js in Resources */,
 				1CA9F8491ACAFB6F003588EE /* Cartfile in Resources */,
 				1CB7E0B11AE821570080A2AB /* Settings.bundle in Resources */,
 				1CC20BC71AC5C89600FD26E3 /* MainInterface.storyboard in Resources */,
@@ -568,8 +572,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SpotConnect/SpotConnect.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -646,8 +650,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = ShareAction/ShareAction.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
