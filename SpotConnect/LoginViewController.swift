@@ -28,18 +28,27 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
     var signIn: GIDSignIn?
     
     var didSignOut = false // Can be set by status view to trigger google sign out
-
-    // Spot API constants    
-    let spotApiKey = NSUserDefaults.standardUserDefaults().stringForKey("api_key_preference")!
-    let spotApiUrl = NSUserDefaults.standardUserDefaults().stringForKey("api_endpoint_preference")!
+    
+    let sharedDefaults = NSUserDefaults(suiteName: "group.thinkglobalschool.ExtensionSharingDefaults")
+    let userDefaults = NSUserDefaults.standardUserDefaults()
+    
+    var appConfig = [String: String]()
+    
+    // Config constants
+    let configurationManagedKey: String = "com.apple.configuration.mansaged"
+    let configurationApiEndpoint: String = "apiEndpoint"
+    let configurationApiKey: String = "apiKey"
+    let configurationGoogleClientId: String = "googleClientId"
+    let configurationApiAccessToken: String = "apiAccessToken"
 
     // MARK: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.loadConfiguration()
 
         // Set up Google Sign In
         signIn = GIDSignIn.sharedInstance()
-        signIn?.clientID = "96486200889-cnkki5c8stmbctbn2p3mvv8s1no4qicp.apps.googleusercontent.com"
+        signIn?.clientID = self.appConfig[self.configurationGoogleClientId]
         signIn?.shouldFetchBasicProfile = true
         signIn?.delegate = self
         
@@ -81,12 +90,12 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
     
     func spotApiGetGoogleToken() {
         // Get access token from Spot
-        var endpoint = spotApiUrl + "auth.get_google_auth_token"
+        var endpoint = self.appConfig[self.configurationApiEndpoint]! + "auth.get_google_auth_token"
         
         if let userEmail = self.signIn?.currentUser.profile.email {
             var parameters = [
                 "email": userEmail,
-                "api_key": spotApiKey
+                "api_key": self.appConfig[self.configurationApiKey]!
             ]
             
             Alamofire.request(.POST, endpoint, parameters: parameters, encoding: .URL)
@@ -96,13 +105,14 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
                     // Check status
                     if (json["status"] >= 0) {
                         // Successful login, save access token in the keychaing
-                        let error = Locksmith.saveData(["spot_access_token": json["result"].stringValue], forUserAccount: "spotUser")
-                        
+                        let error = Locksmith.updateData([self.configurationApiAccessToken: json["result"].stringValue], forUserAccount: "spotUser")
+
                         // Check for error saving keychain data
                         if (error == nil) {
                             // Good to go, back to status viewcontroller
                             self.performSegueWithIdentifier("unwindToStatusSegue", sender: self)
                         } else {
+                            println(error)
                             if let kError = error {
                                 if let reason = kError.localizedFailureReason {
                                     self.showMessage(kError.localizedDescription,dismiss: "Dismiss",message: reason)
@@ -122,12 +132,12 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         println("Spot sign in pressed")
         
         // Lets try signing in..
-        let endpoint = spotApiUrl + "auth.get_user_pass_auth_token"
+        let endpoint = self.appConfig[self.configurationApiEndpoint]! + "auth.get_user_pass_auth_token"
 
         let parameters = [
             "username": self.spotUsername.text,
             "password": self.spotPassword.text,
-            "api_key": spotApiKey
+            "api_key": self.appConfig[self.configurationApiKey]!
         ]
 
         Alamofire.request(.POST, endpoint, parameters: parameters, encoding: .URL)
@@ -137,11 +147,11 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
                     // Check status
                     if (json["status"] >= 0) {
                         // Successful login, save access token in the keychaing
-                        let error = Locksmith.saveData(["spot_access_token": json["result"].stringValue], forUserAccount: "spotUser")
+                        let error = Locksmith.updateData([self.configurationApiAccessToken: json["result"].stringValue], forUserAccount: "spotUser")
                     
                         // Check for error saving keychain data
                         if (error == nil) {
-                        // Good to go, back to status viewcontroller
+                            // Good to go, back to status viewcontroller
                             self.performSegueWithIdentifier("unwindToStatusSegue", sender: self)
                         } else {
                             if let kError = error {
@@ -153,6 +163,26 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
                     }
                 }
             }
+    }
+    
+    // MARK: - Helpers
+    // Load in managed app config
+    func loadConfiguration() -> Void {
+        // Try loading the managed app config which is provided by the MDM
+        if let managedConfig: NSDictionary = userDefaults.dictionaryForKey(configurationManagedKey) {
+            self.appConfig[self.configurationApiKey] = managedConfig.objectForKey(self.configurationApiKey) as? String
+            self.appConfig[self.configurationApiEndpoint] = managedConfig.objectForKey(self.configurationApiEndpoint) as? String
+            self.appConfig[self.configurationGoogleClientId] = managedConfig.objectForKey(self.configurationGoogleClientId) as? String
+        } else {
+            // Nope.. fall back to local plist (DEV ONLY!!!)
+            if let path = NSBundle.mainBundle().pathForResource("AppConfig", ofType: "plist") {
+                if let localConfig = NSDictionary(contentsOfFile: path) {
+                    self.appConfig[self.configurationApiKey] = localConfig.objectForKey(self.configurationApiKey) as? String
+                    self.appConfig[self.configurationApiEndpoint] = localConfig.objectForKey(self.configurationApiEndpoint) as? String
+                    self.appConfig[self.configurationGoogleClientId] = localConfig.objectForKey(self.configurationGoogleClientId) as? String
+                }
+            }
+        }
     }
 }
 

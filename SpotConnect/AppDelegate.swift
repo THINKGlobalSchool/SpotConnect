@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Clear the spot token user defaults, we populate this when the app loads from the keychain
         let sharedDefaults = NSUserDefaults(suiteName: "group.thinkglobalschool.ExtensionSharingDefaults")
-        sharedDefaults?.removeObjectForKey("spot_access_token")
+        sharedDefaults?.removeObjectForKey("apiAccessToken")
         sharedDefaults?.synchronize()
     }
 

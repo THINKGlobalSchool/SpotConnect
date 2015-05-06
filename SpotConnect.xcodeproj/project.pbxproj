@@ -37,6 +37,7 @@
 		1CC20BC51AC5C89600FD26E3 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC20BC41AC5C89600FD26E3 /* ShareViewController.swift */; };
 		1CC20BC71AC5C89600FD26E3 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CC20BC61AC5C89600FD26E3 /* MainInterface.storyboard */; };
 		1CC20BCA1AC5C89600FD26E3 /* ShareAction.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1CC20BC01AC5C89600FD26E3 /* ShareAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		1CC3DF461AFA4BD4003E4F1C /* AppConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1CC3DF451AFA4BD4003E4F1C /* AppConfig.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +102,7 @@
 		1CC20BC61AC5C89600FD26E3 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		1CC20BCF1AC5C8E700FD26E3 /* ShareAction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ShareAction.entitlements; sourceTree = "<group>"; };
 		1CC20BD01AC5C92600FD26E3 /* SpotConnect.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SpotConnect.entitlements; sourceTree = "<group>"; };
+		1CC3DF451AFA4BD4003E4F1C /* AppConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfig.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 				1CB7E0A91AE153470080A2AB /* UIViewControllerUtilities.swift */,
 				1CC20B9A1AC5B5E500FD26E3 /* Supporting Files */,
 				1CB7E0AE1AE821570080A2AB /* Settings.bundle */,
+				1CC3DF451AFA4BD4003E4F1C /* AppConfig.plist */,
 			);
 			path = SpotConnect;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CC3DF461AFA4BD4003E4F1C /* AppConfig.plist in Resources */,
 				1CB7E0961AD6CCB00080A2AB /* GoogleSignIn.framework in Resources */,
 				1CC20BA21AC5B5E500FD26E3 /* Main.storyboard in Resources */,
 				1CC20BA71AC5B5E500FD26E3 /* LaunchScreen.xib in Resources */,

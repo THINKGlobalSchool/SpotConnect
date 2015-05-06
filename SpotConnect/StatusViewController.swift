@@ -28,9 +28,7 @@ class StatusViewController: UIViewController {
     let sharedDefaults = NSUserDefaults(suiteName: "group.thinkglobalschool.ExtensionSharingDefaults")
     let userDefaults = NSUserDefaults.standardUserDefaults()
     
-    // Spot API vars
-    var spotApiKey: String = ""
-    var spotApiUrl: String = ""
+    var appConfig = [String: String]()
     
     // Image cache
     var imageCache = [String:UIImage]()
@@ -38,52 +36,57 @@ class StatusViewController: UIViewController {
     // User info cache
     var infoCache = [String:String]()
     
-    // MARK: UIViewController
+    // Config constants
+    let configurationManagedKey: String = "com.apple.configuration.mansaged"
+    let configurationApiEndpoint: String = "apiEndpoint"
+    let configurationApiKey: String = "apiKey"
+    let configurationGoogleClientId: String = "googleClientId"
+    let configurationApiAccessToken: String = "apiAccessToken"
+    
+    // MARK: UIViewController    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        self.loadConfiguration()
         
         var apiSettingsAvailable = false
         
-        if let apiKey = NSUserDefaults.standardUserDefaults().stringForKey("api_key_preference") {
-            self.spotApiKey = apiKey
+        // Check for api key and endpoint
+        if let apiKey: String = self.appConfig[self.configurationApiKey], apiEndpoint: String = self.appConfig[self.configurationApiEndpoint] {
             apiSettingsAvailable = true
         } else {
-            apiSettingsAvailable = false
             let alertController = UIAlertController(title: "Error", message:
-                "No API Key has been supplied in the app settings", preferredStyle: UIAlertControllerStyle.Alert)
+                "One or more configuration values is unavailable", preferredStyle: UIAlertControllerStyle.Alert)
             self.presentViewController(alertController, animated: true, completion: nil)
         }
-        
-        if let apiUrl = NSUserDefaults.standardUserDefaults().stringForKey("api_endpoint_preference") {
-            self.spotApiUrl = apiUrl
-            apiSettingsAvailable = true
-        } else {
-            apiSettingsAvailable = false
-            let alertController = UIAlertController(title: "Error", message:
-                "No API URL has been supplied in the app settings", preferredStyle: UIAlertControllerStyle.Alert)
-            self.presentViewController(alertController, animated: true, completion: nil)
-        }
-        
+
         if (apiSettingsAvailable) {
             // This is sucky.. copying the key and url into the shared defaults so the
             // share extension can access them
-            self.sharedDefaults?.setObject(self.spotApiKey, forKey: "api_key_preference")
-            self.sharedDefaults?.setObject(self.spotApiUrl, forKey: "api_endpoint_preference")
+            self.sharedDefaults?.setObject(self.appConfig[self.configurationApiKey], forKey: self.configurationApiKey)
+            self.sharedDefaults?.setObject(self.appConfig[self.configurationApiEndpoint], forKey: self.configurationApiEndpoint)
             self.sharedDefaults?.synchronize()
             
-            
+            // Store in keychain
             let (spotAuthDictionary, spotDictionaryError) = Locksmith.loadDataForUserAccount("spotUser")
             
             // Check for stored user/token info
             if (spotDictionaryError == nil && spotAuthDictionary != nil) {
-                if let accessToken = spotAuthDictionary?["spot_access_token"] as? NSString {
-                    self.sharedDefaults?.setObject(accessToken, forKey: "spot_access_token")
+                if let accessToken = spotAuthDictionary?[self.configurationApiAccessToken] as? NSString {
+                    self.sharedDefaults?.setObject(accessToken, forKey: self.configurationApiAccessToken)
                     self.sharedDefaults?.synchronize()
                     
                     // Populate user info
                     spotApiGetUserProfile()
+                } else {
+                    // Dictionary exists, but there is no matching key, show login
+                    println("here")
+                    performSegueWithIdentifier("ShowLoginSegue", sender: self)
                 }
-                
             } else {
                 // No info! Segue to the login page
                 performSegueWithIdentifier("ShowLoginSegue", sender: self)
@@ -114,7 +117,7 @@ class StatusViewController: UIViewController {
         // Check for error saving keychain data
         if (error == nil) {
             // Clear out the user defaults data as well
-            self.sharedDefaults?.removeObjectForKey("spot_access_token")
+            self.sharedDefaults?.removeObjectForKey(self.configurationApiAccessToken)
             self.sharedDefaults?.synchronize()
             
             // Clear the caches
@@ -146,15 +149,15 @@ class StatusViewController: UIViewController {
     /**
      * Load Spot user data from the API
      */
-    func spotApiGetUserProfile() {
+    func spotApiGetUserProfile() -> Void {
         // Get access token from Spot
-        var endpoint = self.spotApiUrl + "user.get_profile"
+        var endpoint = self.appConfig[self.configurationApiEndpoint]! + "user.get_profile"
 
-        if let auth_token = self.sharedDefaults?.stringForKey("spot_access_token") {
+        if let auth_token = self.sharedDefaults?.stringForKey(self.configurationApiAccessToken) {
             
             let parameters = [
                 "auth_token": auth_token,
-                "api_key": self.spotApiKey
+                "api_key": self.appConfig[self.configurationApiKey]!
             ]
             
             Alamofire.request(.GET, endpoint, parameters: parameters, encoding: .URL)
@@ -186,7 +189,7 @@ class StatusViewController: UIViewController {
     /**
      * Update the spot user profile elements
      */
-    func spotRefreshUserProfile(json: JSON) {
+    func spotRefreshUserProfile(json: JSON) -> Void {
         // Cache values
         if let userEmail = self.infoCache["userEMail"], userName = self.infoCache["userName"], userUsername = self.infoCache["userUsername"] {
             self.spotUserName.text = userName
@@ -230,5 +233,24 @@ class StatusViewController: UIViewController {
         }
         
         
+    }
+    
+    // Load in managed app config
+    func loadConfiguration() -> Void {
+        // Try loading the managed app config which is provided by the MDM
+        if let managedConfig: NSDictionary = userDefaults.dictionaryForKey(configurationManagedKey) {
+            self.appConfig[self.configurationApiKey] = managedConfig.objectForKey(self.configurationApiKey) as? String
+            self.appConfig[self.configurationApiEndpoint] = managedConfig.objectForKey(self.configurationApiEndpoint) as? String
+            self.appConfig[self.configurationGoogleClientId] = managedConfig.objectForKey(self.configurationGoogleClientId) as? String
+        } else {
+            // Nope.. fall back to local plist (DEV ONLY!!!)
+            if let path = NSBundle.mainBundle().pathForResource("AppConfig", ofType: "plist") {
+                if let localConfig = NSDictionary(contentsOfFile: path) {
+                    self.appConfig[self.configurationApiKey] = localConfig.objectForKey(self.configurationApiKey) as? String
+                    self.appConfig[self.configurationApiEndpoint] = localConfig.objectForKey(self.configurationApiEndpoint) as? String
+                    self.appConfig[self.configurationGoogleClientId] = localConfig.objectForKey(self.configurationGoogleClientId) as? String
+                }
+            }
+        }
     }
 }
