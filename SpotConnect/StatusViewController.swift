@@ -37,7 +37,7 @@ class StatusViewController: UIViewController {
     var infoCache = [String:String]()
     
     // Config constants
-    let configurationManagedKey: String = "com.apple.configuration.mansaged"
+    let configurationManagedKey: String = "com.apple.configuration.managed"
     let configurationApiEndpoint: String = "apiEndpoint"
     let configurationApiKey: String = "apiKey"
     let configurationGoogleClientId: String = "googleClientId"
@@ -46,7 +46,6 @@ class StatusViewController: UIViewController {
     // MARK: UIViewController    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -239,13 +238,17 @@ class StatusViewController: UIViewController {
     func loadConfiguration() -> Void {
         // Try loading the managed app config which is provided by the MDM
         if let managedConfig: NSDictionary = userDefaults.dictionaryForKey(configurationManagedKey) {
+            println("Status VC: Got managed config")
+            println(managedConfig)
             self.appConfig[self.configurationApiKey] = managedConfig.objectForKey(self.configurationApiKey) as? String
             self.appConfig[self.configurationApiEndpoint] = managedConfig.objectForKey(self.configurationApiEndpoint) as? String
             self.appConfig[self.configurationGoogleClientId] = managedConfig.objectForKey(self.configurationGoogleClientId) as? String
         } else {
             // Nope.. fall back to local plist (DEV ONLY!!!)
             if let path = NSBundle.mainBundle().pathForResource("AppConfig", ofType: "plist") {
+                println("Status VC: Fallback to  local config")
                 if let localConfig = NSDictionary(contentsOfFile: path) {
+                    println(localConfig)
                     self.appConfig[self.configurationApiKey] = localConfig.objectForKey(self.configurationApiKey) as? String
                     self.appConfig[self.configurationApiEndpoint] = localConfig.objectForKey(self.configurationApiEndpoint) as? String
                     self.appConfig[self.configurationGoogleClientId] = localConfig.objectForKey(self.configurationGoogleClientId) as? String

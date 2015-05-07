@@ -35,7 +35,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
     var appConfig = [String: String]()
     
     // Config constants
-    let configurationManagedKey: String = "com.apple.configuration.mansaged"
+    let configurationManagedKey: String = "com.apple.configuration.managed"
     let configurationApiEndpoint: String = "apiEndpoint"
     let configurationApiKey: String = "apiKey"
     let configurationGoogleClientId: String = "googleClientId"
@@ -134,6 +134,8 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         // Lets try signing in..
         let endpoint = self.appConfig[self.configurationApiEndpoint]! + "auth.get_user_pass_auth_token"
 
+        println(endpoint)
+        
         let parameters = [
             "username": self.spotUsername.text,
             "password": self.spotPassword.text,
@@ -170,6 +172,8 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
     func loadConfiguration() -> Void {
         // Try loading the managed app config which is provided by the MDM
         if let managedConfig: NSDictionary = userDefaults.dictionaryForKey(configurationManagedKey) {
+            println("Login VC: Got managed config")
+            println(managedConfig)
             self.appConfig[self.configurationApiKey] = managedConfig.objectForKey(self.configurationApiKey) as? String
             self.appConfig[self.configurationApiEndpoint] = managedConfig.objectForKey(self.configurationApiEndpoint) as? String
             self.appConfig[self.configurationGoogleClientId] = managedConfig.objectForKey(self.configurationGoogleClientId) as? String
@@ -177,6 +181,8 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
             // Nope.. fall back to local plist (DEV ONLY!!!)
             if let path = NSBundle.mainBundle().pathForResource("AppConfig", ofType: "plist") {
                 if let localConfig = NSDictionary(contentsOfFile: path) {
+                    println("Login VC: Fallback to  local config")
+                    println(localConfig)
                     self.appConfig[self.configurationApiKey] = localConfig.objectForKey(self.configurationApiKey) as? String
                     self.appConfig[self.configurationApiEndpoint] = localConfig.objectForKey(self.configurationApiEndpoint) as? String
                     self.appConfig[self.configurationGoogleClientId] = localConfig.objectForKey(self.configurationGoogleClientId) as? String
