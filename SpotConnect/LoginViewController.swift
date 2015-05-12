@@ -27,43 +27,39 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
     // MARK: - Class constants/vars
     var signIn: GIDSignIn?
     
+    var spotApi = SpotApi()
+    
     var didSignOut = false // Can be set by status view to trigger google sign out
     
     let sharedDefaults = NSUserDefaults(suiteName: "group.thinkglobalschool.ExtensionSharingDefaults")
     let userDefaults = NSUserDefaults.standardUserDefaults()
     
-    var appConfig = [String: String]()
-    
-    // Config constants
-    let configurationManagedKey: String = "com.apple.configuration.managed"
-    let configurationApiEndpoint: String = "apiEndpoint"
-    let configurationApiKey: String = "apiKey"
-    let configurationGoogleClientId: String = "googleClientId"
-    let configurationApiAccessToken: String = "apiAccessToken"
-
     // MARK: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.loadConfiguration()
 
-        // Set up Google Sign In
-        signIn = GIDSignIn.sharedInstance()
-        signIn?.clientID = self.appConfig[self.configurationGoogleClientId]
-        signIn?.shouldFetchBasicProfile = true
-        signIn?.delegate = self
-        
-        // Customize the Google Button
-        self.signInButton.style = GIDSignInButtonStyle.Standard
-        self.signInButton.colorScheme = GIDSignInButtonColorScheme.Dark
-        
-        // Check if we're returning here from a sign out
-        if (self.didSignOut) {
-            self.didSignOut = false
+        if let clientId: String = spotApi.getConfigValueForKey(SpotConfig.configurationGoogleClientId) {
+            // Set up Google Sign In
+            signIn = GIDSignIn.sharedInstance()
+            signIn?.clientID = spotApi.getConfigValueForKey(SpotConfig.configurationGoogleClientId)!
+            signIn?.shouldFetchBasicProfile = true
+            signIn?.delegate = self
             
-            // Force google disconnect
-            signIn?.disconnect()
+            // Customize the Google Button
+            self.signInButton.style = GIDSignInButtonStyle.Standard
+            self.signInButton.colorScheme = GIDSignInButtonColorScheme.Dark
+            
+            // Check if we're returning here from a sign out
+            if (self.didSignOut) {
+                self.didSignOut = false
+                
+                // Force google disconnect
+                signIn?.disconnect()
+            }
+        } else {
+            // No client ID..
+            self.showMessage("Error", message: "Google client configuration is unavailable")
         }
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -76,7 +72,6 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         // Check for error
         if (error == nil) {
             // Called when we're signed in
-            println("Signed In")
             spotApiGetGoogleToken()
         } else {
             println(error)
@@ -85,44 +80,42 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
     }
     
     func signIn(signIn: GIDSignIn!, didDisconnectWithUser user: GIDGoogleUser!, withError error: NSError!) {
-        println("Signed Out")
+        //println("Signed Out")
     }
     
     func spotApiGetGoogleToken() {
         // Get access token from Spot
-        var endpoint = self.appConfig[self.configurationApiEndpoint]! + "auth.get_google_auth_token"
-        
         if let userEmail = self.signIn?.currentUser.profile.email {
             var parameters = [
-                "email": userEmail,
-                "api_key": self.appConfig[self.configurationApiKey]!
+                "email": userEmail
             ]
             
-            Alamofire.request(.POST, endpoint, parameters: parameters, encoding: .URL)
-                .responseJSON{ (request, response, data, error) in
-                    var json = JSON(data!)
+            spotApi.makePostRequest(SpotMethods.authGetGoogleToken, parameters: parameters) {
+                (request, response, data, error) in
+                
+                var json = JSON(data!)
+                
+                // Check status
+                if (json["status"] >= 0) {
+                    // Successful login, save access token in the keychaing
+                    let error = Locksmith.updateData([SpotConfig.configurationApiAccessToken: json["result"].stringValue], forUserAccount: "spotUser")
                     
-                    // Check status
-                    if (json["status"] >= 0) {
-                        // Successful login, save access token in the keychaing
-                        let error = Locksmith.updateData([self.configurationApiAccessToken: json["result"].stringValue], forUserAccount: "spotUser")
-
-                        // Check for error saving keychain data
-                        if (error == nil) {
-                            // Good to go, back to status viewcontroller
-                            self.performSegueWithIdentifier("unwindToStatusSegue", sender: self)
-                        } else {
-                            println(error)
-                            if let kError = error {
-                                if let reason = kError.localizedFailureReason {
-                                    self.showMessage(kError.localizedDescription,dismiss: "Dismiss",message: reason)
-                                }
+                    // Check for error saving keychain data
+                    if (error == nil) {
+                        // Good to go, back to status viewcontroller
+                        self.performSegueWithIdentifier("unwindToStatusSegue", sender: self)
+                    } else {
+                        println(error)
+                        if let kError = error {
+                            if let reason = kError.localizedFailureReason {
+                                self.showMessage(kError.localizedDescription,dismiss: "Dismiss",message: reason)
                             }
                         }
-                    } else {
-                        self.showMessage("Error", dismiss: "Dismiss", message: json["message"].stringValue)
-                        self.signIn?.disconnect() // Disconnect the user that just authorized
                     }
+                } else {
+                    self.showMessage("Error", dismiss: "Dismiss", message: json["message"].stringValue)
+                    self.signIn?.disconnect() // Disconnect the user that just authorized
+                }
             }
         }
     }
@@ -132,24 +125,19 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         println("Spot sign in pressed")
         
         // Lets try signing in..
-        let endpoint = self.appConfig[self.configurationApiEndpoint]! + "auth.get_user_pass_auth_token"
-
-        println(endpoint)
-        
         let parameters = [
             "username": self.spotUsername.text,
-            "password": self.spotPassword.text,
-            "api_key": self.appConfig[self.configurationApiKey]!
+            "password": self.spotPassword.text
         ]
 
-        Alamofire.request(.POST, endpoint, parameters: parameters, encoding: .URL)
-            .responseJSON{ (request, response, data, error) in
+        spotApi.makePostRequest(SpotMethods.authGetToken, parameters: parameters) {
+            (request, response, data, error) in
                 if (error == nil) {
                     var json = JSON(data!)
                     // Check status
                     if (json["status"] >= 0) {
                         // Successful login, save access token in the keychaing
-                        let error = Locksmith.updateData([self.configurationApiAccessToken: json["result"].stringValue], forUserAccount: "spotUser")
+                        let error = Locksmith.updateData([SpotConfig.configurationApiAccessToken: json["result"].stringValue], forUserAccount: "spotUser")
                     
                         // Check for error saving keychain data
                         if (error == nil) {
@@ -165,30 +153,6 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
                     }
                 }
             }
-    }
-    
-    // MARK: - Helpers
-    // Load in managed app config
-    func loadConfiguration() -> Void {
-        // Try loading the managed app config which is provided by the MDM
-        if let managedConfig: NSDictionary = userDefaults.dictionaryForKey(configurationManagedKey) {
-            println("Login VC: Got managed config")
-            println(managedConfig)
-            self.appConfig[self.configurationApiKey] = managedConfig.objectForKey(self.configurationApiKey) as? String
-            self.appConfig[self.configurationApiEndpoint] = managedConfig.objectForKey(self.configurationApiEndpoint) as? String
-            self.appConfig[self.configurationGoogleClientId] = managedConfig.objectForKey(self.configurationGoogleClientId) as? String
-        } else {
-            // Nope.. fall back to local plist (DEV ONLY!!!)
-            if let path = NSBundle.mainBundle().pathForResource("AppConfig", ofType: "plist") {
-                if let localConfig = NSDictionary(contentsOfFile: path) {
-                    println("Login VC: Fallback to  local config")
-                    println(localConfig)
-                    self.appConfig[self.configurationApiKey] = localConfig.objectForKey(self.configurationApiKey) as? String
-                    self.appConfig[self.configurationApiEndpoint] = localConfig.objectForKey(self.configurationApiEndpoint) as? String
-                    self.appConfig[self.configurationGoogleClientId] = localConfig.objectForKey(self.configurationGoogleClientId) as? String
-                }
-            }
-        }
     }
 }
 

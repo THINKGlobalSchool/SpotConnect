@@ -15,15 +15,7 @@ import MobileCoreServices
 class ShareViewController: SLComposeServiceViewController {
     
     // MARK: - Class constants/vars
-    
-    // Config constants
-    let configurationApiEndpoint: String = "apiEndpoint"
-    let configurationApiKey: String = "apiKey"
-    let configurationApiAccessToken: String = "apiAccessToken"
-    
-    // Spot API constants
-    var spotApiKey: String?
-    var spotApiUrl: String?
+    var spotApi: SpotApi!
     
     let sharedDefaults = NSUserDefaults(suiteName: "group.thinkglobalschool.ExtensionSharingDefaults")
 
@@ -39,25 +31,26 @@ class ShareViewController: SLComposeServiceViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.spotApiKey = NSUserDefaults(suiteName: "group.thinkglobalschool.ExtensionSharingDefaults")!.stringForKey(self.configurationApiKey)!
-        self.spotApiUrl = NSUserDefaults(suiteName: "group.thinkglobalschool.ExtensionSharingDefaults")!.stringForKey(self.configurationApiEndpoint)!
-        
         self.view.hidden = true
 
         // Check for access token
-        if let accessToken = self.sharedDefaults?.objectForKey("apiAccessToken") as? NSString {
+        if let accessToken = self.sharedDefaults?.objectForKey(SpotConfig.configurationApiAccessToken) as? NSString {
+            
+            // Create an API instance
+            spotApi = SpotApi(
+                apiKey: NSUserDefaults(suiteName: "group.thinkglobalschool.ExtensionSharingDefaults")!.stringForKey(SpotConfig.configurationApiKey)!,
+                apiEndpoint: NSUserDefaults(suiteName: "group.thinkglobalschool.ExtensionSharingDefaults")!.stringForKey(SpotConfig.configurationApiEndpoint)!,
+                apiAccessToken: accessToken as String
+            )
+            
             // Good, got a token. Let's check if we can talk to the server
             let method = "util.ping"
-            let endpoint = self.spotApiUrl! + method
-            
-            var ping_parameters = [
-                "api_key": self.spotApiKey!
-            ]
+
             
             println("Attempting ping..")
             
-            Alamofire.request(.GET, endpoint, parameters: ping_parameters, encoding: .URL)
-                .responseJSON{ (request, response, data, error) in
+            spotApi.makeGetRequest(SpotMethods.utilPing, parameters: nil) {
+                (request, response, data, error) in
                     if (error != nil) {
                         if let uError = error {
                             // Ok, had an error
@@ -197,21 +190,30 @@ class ShareViewController: SLComposeServiceViewController {
             // Get the access token from shared defaults
             self.sharedDefaults?.synchronize()
             
-            // Load in access token to make posts
-            if let accessToken = self.sharedDefaults?.objectForKey(self.configurationApiAccessToken) as? NSString {
-                
+            var progressText = "Posting.."
+            
+            if let accessToken = spotApi.getConfigValueForKey(SpotConfig.configurationApiAccessToken) {
                 // Check what we're going to post
                 if let url = self.postUrl {
                     // Got a url, post a bookmark
                     self.postBookmark(self.contentText as String, url: url, token: accessToken)
+                    progressText = "Creating Bookmark"
                 } else if let text = self.postText {
                     // Got text
                     self.postWire(text, token: accessToken)
+                    progressText = "Creating Wire Post"
                 } else if (self.postImages.count != 0) {
                     // Got images
                     self.postImages(self.postImages, description: self.contentText, token: accessToken)
+                    progressText = "Uploading Photo(s)"
                 }
             }
+            
+            
+            // Create and add the view to the screen.
+            let progressHUD = ProgressHUD(text: progressText)
+            self.view.addSubview(progressHUD)
+            self.view.backgroundColor = UIColor(white: 1, alpha: 0.7)
         }
     }
     
@@ -229,23 +231,17 @@ class ShareViewController: SLComposeServiceViewController {
     
     // Post a bookmark
     func postBookmark(title: String, url: NSURL, token: NSString) -> Void {
-        let method = "bookmark.post"
-        let endpoint = self.spotApiUrl! + method
-        
         var post_parameters = [
             "title": title,
             "url": url.URLString,
-            "api_key": self.spotApiKey!,
-            "auth_token": token
         ]
-        
         
         // Success/Error messages
         var message: String = ""
         var title: String = ""
         
-        Alamofire.request(.POST, endpoint, parameters: post_parameters, encoding: .URL)
-            .responseJSON{ (request, response, data, error) in
+        spotApi.makePostRequest(SpotMethods.bookmarkPost, parameters: post_parameters) {
+            (request, response, data, error) in
                 // Check for errors
                 if (error != nil) {
                     if let uError = error {
@@ -285,21 +281,17 @@ class ShareViewController: SLComposeServiceViewController {
     
     // Make a wire post
     func postWire(text: String, token: NSString) -> Void {
-        let method = "thewire.post"
-        let endpoint = self.spotApiUrl! + method
         
         var post_parameters = [
-            "text": text,
-            "api_key": self.spotApiKey!,
-            "auth_token": token
+            "text": text
         ]
         
         // Success/Error messages
         var message: String = ""
         var title: String = ""
         
-        Alamofire.request(.POST, endpoint, parameters: post_parameters, encoding: .URL)
-            .responseJSON{ (request, response, data, error) in
+        spotApi.makePostRequest(SpotMethods.thewirePost, parameters: post_parameters) {
+            (request, response, data, error) in
                 // Check for errors
                 if (error != nil) {
                     if let uError = error {
@@ -340,46 +332,34 @@ class ShareViewController: SLComposeServiceViewController {
     
     // Post photos/images
     func postImages(images: [NSURL], description: String, token: NSString) -> Void {
-        let method = "photos.post"
-        let endpoint = self.spotApiUrl! + method
-        
         // Spot uses a timestamp to identify a batch before it's created
-        var batchInt: Int = Int(NSDate().timeIntervalSince1970)
-        var batch: String = "\(batchInt)"
+        var batchDate = NSDate().timeIntervalSince1970
+        var batch: String = "\(batchDate)"
         
         var post_parameters = [
             "batch": batch,
             "album": "0", // @TODO, need to include this parameter because Elgg.
-            "description": description,
-            "api_key": self.spotApiKey!,
-            "auth_token": token as String
+            "description": description
         ]
         
         // Dispatch group for multiple uploads
         let uploadDispatch = dispatch_group_create()
         
         var uploadError: NSError!
-        
 
         for image in images {
     
             dispatch_group_enter(uploadDispatch)
-            let urlRequest = photoUploadRequestWithComponents(endpoint, parameters: post_parameters, image: image)
+
+            let urlRequest = spotApi.photoUploadRequestWithComponents(SpotMethods.photosPost, parameters: post_parameters, image: image)
             
-            Alamofire.upload(urlRequest.0, urlRequest.1)
-                .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
-                    println("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
-                }
-                .responseJSON { (request, response, JSON, error) in
-                    
+            spotApi.uploadWithUrlRequest(urlRequest) {
+                (request, response, JSON, error) in
                     if let error = error {
                         uploadError = error
                     }
-                    
-                    println(request)
-                    println(response)
+                
                     println(JSON)
-                    println(error)
 
                     dispatch_group_leave(uploadDispatch)
             }
@@ -392,26 +372,23 @@ class ShareViewController: SLComposeServiceViewController {
                 let alertController = UIAlertController(title: "Uh-oh", message:
                     uploadError?.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
                 
-                alertController.addAction(UIAlertAction(title: "Ok :(", style: UIAlertActionStyle.Default, handler: { action in
+                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { action in
                     self.completeExtension()
                 }))
                 
-            } else {
-                let method = "photos.finalize.post"
-                let endpoint = self.spotApiUrl! + method
+                self.presentViewController(alertController, animated: true, completion: nil)
                 
+            } else {
                 var post_parameters = [
-                    "batch": batch,
-                    "api_key": self.spotApiKey!,
-                    "auth_token": token
+                    "batch": batch
                 ]
                 
                 // Success/Error messages
                 var message: String = ""
                 var title: String = ""
                 
-                Alamofire.request(.POST, endpoint, parameters: post_parameters, encoding: .URL)
-                    .responseJSON{ (request, response, data, error) in
+                self.spotApi.makePostRequest(SpotMethods.photosFinalizePost, parameters: post_parameters) {
+                    (request, response, data, error) in
                         // Check for errors
                         if (error != nil) {
                             if let uError = error {
@@ -451,45 +428,4 @@ class ShareViewController: SLComposeServiceViewController {
             }
         }
     }
-    
-    // This function creates the required URLRequestConvertible and NSData we need to use Alamofire.upload (modified from: http://stackoverflow.com/questions/26121827/uploading-file-with-parameters-using-alamofire/26747857#26747857 )
-    func photoUploadRequestWithComponents(urlString:String, parameters:Dictionary<String, String>, image: NSURL) -> (URLRequestConvertible, NSData) {
-        
-        // create url request to send
-        var mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: urlString)!)
-        mutableURLRequest.HTTPMethod = Alamofire.Method.POST.rawValue
-        let boundaryConstant = "spotconnect-image-boundary";
-        let contentType = "multipart/form-data;boundary="+boundaryConstant
-        mutableURLRequest.setValue(contentType, forHTTPHeaderField: "Content-Type")
-        
-        // create upload data to send
-        let uploadData = NSMutableData()
-        
-        var contentLength: Int = 0
-
-        if let imageData = NSData(contentsOfURL: image) {
-            // Resolve data about this image
-            let fileExt: String = image.pathExtension!
-            let filePrefix: String = image.lastPathComponent!.stringByDeletingPathExtension
-            let filename = "\(filePrefix).\(fileExt)"
-            contentLength = imageData.length
-    
-            // add image
-            uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-            uploadData.appendData("Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-            uploadData.appendData("Content-Type: image/\(fileExt)\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-            uploadData.appendData(imageData)
-        }
-        
-        // add parameters
-        for (key, value) in parameters {
-            uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-            uploadData.appendData("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n\(value)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        }
-        uploadData.appendData("\r\n--\(boundaryConstant)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-
-        // return URLRequestConvertible and NSData
-        return (Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0, uploadData)
-    }
-
 }

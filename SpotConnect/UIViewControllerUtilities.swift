@@ -10,13 +10,20 @@ import Foundation
 import UIKit
 
 extension UIViewController {
-    // Show an alert, helper
+    // Show a message with a dismiss action
     func showMessage(title: NSString, dismiss: NSString, message: NSString) {
         let alertController = UIAlertController(title: title.description, message:
             message.description, preferredStyle: UIAlertControllerStyle.Alert)
         
         alertController.addAction(UIAlertAction(title: dismiss.description, style: UIAlertActionStyle.Default,handler: nil))
         
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    // Show a message without a dismiss action
+    func showMessage(title: NSString, message: NSString) {
+        let alertController = UIAlertController(title: title.description, message:
+            message.description, preferredStyle: UIAlertControllerStyle.Alert)
         self.presentViewController(alertController, animated: true, completion: nil)
     }
 }
