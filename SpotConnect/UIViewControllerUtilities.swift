@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 extension UIViewController {
+
     // Show a message with a dismiss action
     func showMessage(title: NSString, dismiss: NSString, message: NSString) {
         let alertController = UIAlertController(title: title.description, message:
@@ -25,5 +26,22 @@ extension UIViewController {
         let alertController = UIAlertController(title: title.description, message:
             message.description, preferredStyle: UIAlertControllerStyle.Alert)
         self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func showProgressHUD(label: String) ->Void {
+        var progressText = label
+        let progressHUD = ProgressHUD(text: progressText)
+        self.view.addSubview(progressHUD)
+        self.view.backgroundColor = UIColor(white: 1, alpha: 0.7)
+    }
+    
+    func hideProgressHUD() -> Void {
+        for view in self.view.subviews {
+            if view.isKindOfClass(ProgressHUD) {
+                if let progressView:ProgressHUD = view as? ProgressHUD {
+                    progressView.hide()
+                }
+            }
+        }
     }
 }

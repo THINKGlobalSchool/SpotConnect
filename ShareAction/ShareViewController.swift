@@ -189,31 +189,29 @@ class ShareViewController: SLComposeServiceViewController {
         } else {
             // Get the access token from shared defaults
             self.sharedDefaults?.synchronize()
-            
-            var progressText = "Posting.."
-            
+
             if let accessToken = spotApi.getConfigValueForKey(SpotConfig.configurationApiAccessToken) {
                 // Check what we're going to post
                 if let url = self.postUrl {
                     // Got a url, post a bookmark
                     self.postBookmark(self.contentText as String, url: url, token: accessToken)
-                    progressText = "Creating Bookmark"
                 } else if let text = self.postText {
                     // Got text
                     self.postWire(text, token: accessToken)
-                    progressText = "Creating Wire Post"
                 } else if (self.postImages.count != 0) {
                     // Got images
                     self.postImages(self.postImages, description: self.contentText, token: accessToken)
-                    progressText = "Uploading Photo(s)"
                 }
             }
             
             
             // Create and add the view to the screen.
-            let progressHUD = ProgressHUD(text: progressText)
-            self.view.addSubview(progressHUD)
-            self.view.backgroundColor = UIColor(white: 1, alpha: 0.7)
+//            var progressText = "Posting"
+//            let progressHUD = ProgressHUD(text: progressText)
+//            self.view.addSubview(progressHUD)
+//            self.view.backgroundColor = UIColor(white: 1, alpha: 0.7)
+            
+            self.showProgressHUD("Posting")
         }
     }
     
@@ -251,7 +249,7 @@ class ShareViewController: SLComposeServiceViewController {
                             message = reason
                         } else {
                             message = title
-                            title = "error"
+                            title = "Error"
                         }
                     }
                 } else {                    
@@ -267,6 +265,8 @@ class ShareViewController: SLComposeServiceViewController {
                         message = json["message"].stringValue
                     }
                 }
+            
+                self.hideProgressHUD()
                 
                 let alertController = UIAlertController(title: title, message:
                     message, preferredStyle: UIAlertControllerStyle.Alert)
@@ -301,7 +301,7 @@ class ShareViewController: SLComposeServiceViewController {
                             message = reason
                         } else {
                             message = title
-                            title = "error"
+                            title = "Error"
                         }
                     }
                 } else {
@@ -318,7 +318,9 @@ class ShareViewController: SLComposeServiceViewController {
                     }
                     
                 }
-                
+            
+                self.hideProgressHUD()
+            
                 let alertController = UIAlertController(title: title, message:
                     message, preferredStyle: UIAlertControllerStyle.Alert)
                 
@@ -398,7 +400,7 @@ class ShareViewController: SLComposeServiceViewController {
                                     message = reason
                                 } else {
                                     message = title
-                                    title = "error"
+                                    title = "Error"
                                 }
                             }
                         } else {
@@ -415,7 +417,9 @@ class ShareViewController: SLComposeServiceViewController {
                             }
                             
                         }
-                        
+                    
+                        self.hideProgressHUD()
+                
                         let alertController = UIAlertController(title: title, message:
                             message, preferredStyle: UIAlertControllerStyle.Alert)
                         
