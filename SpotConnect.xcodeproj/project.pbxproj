@@ -12,6 +12,14 @@
 		1C810C5D1B024ED300DA42CF /* SpotApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C810C5B1B024ED300DA42CF /* SpotApi.swift */; };
 		1C810C5F1B029A1500DA42CF /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C810C5E1B029A1500DA42CF /* ProgressHUD.swift */; };
 		1C810C601B029A1500DA42CF /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C810C5E1B029A1500DA42CF /* ProgressHUD.swift */; };
+		1C810C631B04E66D00DA42CF /* gradient4k.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C810C621B04E66D00DA42CF /* gradient4k.png */; };
+		1C810C641B04E66D00DA42CF /* gradient4k.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C810C621B04E66D00DA42CF /* gradient4k.png */; };
+		1C810C681B04EB7100DA42CF /* spotconnect.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C810C651B04EB7100DA42CF /* spotconnect.png */; };
+		1C810C691B04EB7100DA42CF /* spotconnect.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C810C651B04EB7100DA42CF /* spotconnect.png */; };
+		1C810C6A1B04EB7100DA42CF /* spotconnect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C810C661B04EB7100DA42CF /* spotconnect@2x.png */; };
+		1C810C6B1B04EB7100DA42CF /* spotconnect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C810C661B04EB7100DA42CF /* spotconnect@2x.png */; };
+		1C810C6C1B04EB7100DA42CF /* spotconnect@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C810C671B04EB7100DA42CF /* spotconnect@3x.png */; };
+		1C810C6D1B04EB7100DA42CF /* spotconnect@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C810C671B04EB7100DA42CF /* spotconnect@3x.png */; };
 		1CA9F8471ACAFB6F003588EE /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 1CA9F8461ACAFB6F003588EE /* Cartfile */; };
 		1CA9F8481ACAFB6F003588EE /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 1CA9F8461ACAFB6F003588EE /* Cartfile */; };
 		1CA9F8491ACAFB6F003588EE /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 1CA9F8461ACAFB6F003588EE /* Cartfile */; };
@@ -78,6 +86,10 @@
 		1C3A58201AEA89DB0027ED94 /* SpotConnect.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = SpotConnect.js; sourceTree = "<group>"; };
 		1C810C5B1B024ED300DA42CF /* SpotApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotApi.swift; sourceTree = "<group>"; };
 		1C810C5E1B029A1500DA42CF /* ProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressHUD.swift; sourceTree = "<group>"; };
+		1C810C621B04E66D00DA42CF /* gradient4k.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradient4k.png; sourceTree = "<group>"; };
+		1C810C651B04EB7100DA42CF /* spotconnect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spotconnect.png; sourceTree = "<group>"; };
+		1C810C661B04EB7100DA42CF /* spotconnect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "spotconnect@2x.png"; sourceTree = "<group>"; };
+		1C810C671B04EB7100DA42CF /* spotconnect@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "spotconnect@3x.png"; sourceTree = "<group>"; };
 		1CA9F8461ACAFB6F003588EE /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		1CA9F84A1ACB0294003588EE /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		1CB7E0901AD6C82F0080A2AB /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -139,6 +151,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C810C611B04E66D00DA42CF /* images */ = {
+			isa = PBXGroup;
+			children = (
+				1C810C651B04EB7100DA42CF /* spotconnect.png */,
+				1C810C661B04EB7100DA42CF /* spotconnect@2x.png */,
+				1C810C671B04EB7100DA42CF /* spotconnect@3x.png */,
+				1C810C621B04E66D00DA42CF /* gradient4k.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
 		1CC20B8E1AC5B5E500FD26E3 = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +202,7 @@
 				1CB7E0A11AE04C460080A2AB /* LocksmithRequest.swift */,
 				1CB7E0A61AE04E920080A2AB /* StatusViewController.swift */,
 				1CB7E0A91AE153470080A2AB /* UIViewControllerUtilities.swift */,
+				1C810C611B04E66D00DA42CF /* images */,
 				1CC20B9A1AC5B5E500FD26E3 /* Supporting Files */,
 				1CB7E0AE1AE821570080A2AB /* Settings.bundle */,
 				1C810C5E1B029A1500DA42CF /* ProgressHUD.swift */,
@@ -358,11 +382,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CB7E0961AD6CCB00080A2AB /* GoogleSignIn.framework in Resources */,
+				1C810C681B04EB7100DA42CF /* spotconnect.png in Resources */,
 				1CC20BA21AC5B5E500FD26E3 /* Main.storyboard in Resources */,
+				1C810C6A1B04EB7100DA42CF /* spotconnect@2x.png in Resources */,
+				1C810C6C1B04EB7100DA42CF /* spotconnect@3x.png in Resources */,
 				1CC20BA71AC5B5E500FD26E3 /* LaunchScreen.xib in Resources */,
 				1CA9F8471ACAFB6F003588EE /* Cartfile in Resources */,
 				1CB7E09B1AD70C5E0080A2AB /* GoogleSignIn.bundle in Resources */,
 				1CC20BA41AC5B5E500FD26E3 /* Images.xcassets in Resources */,
+				1C810C631B04E66D00DA42CF /* gradient4k.png in Resources */,
 				1CB7E0AF1AE821570080A2AB /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -380,9 +408,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C810C6D1B04EB7100DA42CF /* spotconnect@3x.png in Resources */,
+				1C810C641B04E66D00DA42CF /* gradient4k.png in Resources */,
 				1C3A58211AEA89DB0027ED94 /* SpotConnect.js in Resources */,
 				1CA9F8491ACAFB6F003588EE /* Cartfile in Resources */,
+				1C810C6B1B04EB7100DA42CF /* spotconnect@2x.png in Resources */,
 				1CB7E0B11AE821570080A2AB /* Settings.bundle in Resources */,
+				1C810C691B04EB7100DA42CF /* spotconnect.png in Resources */,
 				1CC20BC71AC5C89600FD26E3 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

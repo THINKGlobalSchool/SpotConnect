@@ -37,6 +37,8 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
     // MARK: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.twoColorLayerGradient(SpotColors.LIGHTRED, colorTwo: SpotColors.DARKRED)
 
         if let clientId: String = spotApi.getConfigValueForKey(SpotConfig.configurationGoogleClientId) {
             // Set up Google Sign In

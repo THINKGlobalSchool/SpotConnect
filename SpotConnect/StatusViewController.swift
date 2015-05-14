@@ -39,6 +39,7 @@ class StatusViewController: UIViewController {
     // MARK: UIViewController    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.twoColorLayerGradient(SpotColors.LIGHTRED, colorTwo: SpotColors.DARKRED)
     }
 
     override func viewDidAppear(animated: Bool) {

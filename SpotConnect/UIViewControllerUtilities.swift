@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+struct SpotColors {
+    static var LIGHTRED: CGColor = UIColor(red:171/255, green:51/255, blue:45/255, alpha:1).CGColor
+    static var DARKRED: CGColor = UIColor(red:127/255, green:19/255, blue: 25/255, alpha:1).CGColor
+}
+
 extension UIViewController {
 
     // Show a message with a dismiss action
@@ -43,5 +48,17 @@ extension UIViewController {
                 }
             }
         }
+    }
+    
+    func twoColorLayerGradient(colorOne: CGColor, colorTwo: CGColor) {
+        let layer : CAGradientLayer = CAGradientLayer()
+        layer.frame.size = self.view.frame.size
+        layer.frame.origin = CGPointMake(0.0,0.0)
+
+        let color0 = colorOne
+        let color1 = colorTwo
+        
+        layer.colors = [color0,color1]
+        self.view.layer.insertSublayer(layer, atIndex: 0)
     }
 }
