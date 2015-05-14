@@ -20,6 +20,19 @@
 		1C810C6B1B04EB7100DA42CF /* spotconnect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C810C661B04EB7100DA42CF /* spotconnect@2x.png */; };
 		1C810C6C1B04EB7100DA42CF /* spotconnect@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C810C671B04EB7100DA42CF /* spotconnect@3x.png */; };
 		1C810C6D1B04EB7100DA42CF /* spotconnect@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C810C671B04EB7100DA42CF /* spotconnect@3x.png */; };
+		1C810C771B04F49600DA42CF /* help@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C810C711B04F49600DA42CF /* help@2x.png */; };
+		1C810C781B04F49600DA42CF /* help@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C810C711B04F49600DA42CF /* help@2x.png */; };
+		1C810C791B04F49600DA42CF /* help@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C810C721B04F49600DA42CF /* help@1x.png */; };
+		1C810C7A1B04F49600DA42CF /* help@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C810C721B04F49600DA42CF /* help@1x.png */; };
+		1C810C7B1B04F49600DA42CF /* help@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C810C731B04F49600DA42CF /* help@3x.png */; };
+		1C810C7C1B04F49600DA42CF /* help@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C810C731B04F49600DA42CF /* help@3x.png */; };
+		1C810C7D1B04F49600DA42CF /* status@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C810C741B04F49600DA42CF /* status@2x.png */; };
+		1C810C7E1B04F49600DA42CF /* status@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C810C741B04F49600DA42CF /* status@2x.png */; };
+		1C810C7F1B04F49600DA42CF /* status@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C810C751B04F49600DA42CF /* status@1x.png */; };
+		1C810C801B04F49600DA42CF /* status@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C810C751B04F49600DA42CF /* status@1x.png */; };
+		1C810C811B04F49600DA42CF /* status@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C810C761B04F49600DA42CF /* status@3x.png */; };
+		1C810C821B04F49600DA42CF /* status@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C810C761B04F49600DA42CF /* status@3x.png */; };
+		1C810C991B05007B00DA42CF /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C810C981B05007B00DA42CF /* HelpViewController.swift */; };
 		1CA9F8471ACAFB6F003588EE /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 1CA9F8461ACAFB6F003588EE /* Cartfile */; };
 		1CA9F8481ACAFB6F003588EE /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 1CA9F8461ACAFB6F003588EE /* Cartfile */; };
 		1CA9F8491ACAFB6F003588EE /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 1CA9F8461ACAFB6F003588EE /* Cartfile */; };
@@ -41,6 +54,15 @@
 		1CB7E0AF1AE821570080A2AB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1CB7E0AE1AE821570080A2AB /* Settings.bundle */; };
 		1CB7E0B01AE821570080A2AB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1CB7E0AE1AE821570080A2AB /* Settings.bundle */; };
 		1CB7E0B11AE821570080A2AB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1CB7E0AE1AE821570080A2AB /* Settings.bundle */; };
+		1CC1D7771B051D9900D8AC67 /* bookmark_final.mov in Resources */ = {isa = PBXBuildFile; fileRef = 1CC1D7741B051D9900D8AC67 /* bookmark_final.mov */; };
+		1CC1D7781B051D9900D8AC67 /* photo_final.mov in Resources */ = {isa = PBXBuildFile; fileRef = 1CC1D7751B051D9900D8AC67 /* photo_final.mov */; };
+		1CC1D7791B051D9900D8AC67 /* signin_final.mov in Resources */ = {isa = PBXBuildFile; fileRef = 1CC1D7761B051D9900D8AC67 /* signin_final.mov */; };
+		1CC1D77B1B05202B00D8AC67 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC1D77A1B05202B00D8AC67 /* AVKit.framework */; };
+		1CC1D7971B0525DF00D8AC67 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC1D7931B0525DF00D8AC67 /* Button.swift */; };
+		1CC1D7981B0525DF00D8AC67 /* InputText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC1D7941B0525DF00D8AC67 /* InputText.swift */; };
+		1CC1D7991B0525DF00D8AC67 /* Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC1D7951B0525DF00D8AC67 /* Modal.swift */; };
+		1CC1D79A1B0525DF00D8AC67 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC1D7961B0525DF00D8AC67 /* UIColor.swift */; };
+		1CC1D79C1B05267900D8AC67 /* SpotHelpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC1D79B1B05267900D8AC67 /* SpotHelpButton.swift */; };
 		1CC20B9D1AC5B5E500FD26E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC20B9C1AC5B5E500FD26E3 /* AppDelegate.swift */; };
 		1CC20BA21AC5B5E500FD26E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CC20BA01AC5B5E500FD26E3 /* Main.storyboard */; };
 		1CC20BA41AC5B5E500FD26E3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CC20BA31AC5B5E500FD26E3 /* Images.xcassets */; };
@@ -90,6 +112,13 @@
 		1C810C651B04EB7100DA42CF /* spotconnect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spotconnect.png; sourceTree = "<group>"; };
 		1C810C661B04EB7100DA42CF /* spotconnect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "spotconnect@2x.png"; sourceTree = "<group>"; };
 		1C810C671B04EB7100DA42CF /* spotconnect@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "spotconnect@3x.png"; sourceTree = "<group>"; };
+		1C810C711B04F49600DA42CF /* help@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "help@2x.png"; sourceTree = "<group>"; };
+		1C810C721B04F49600DA42CF /* help@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "help@1x.png"; sourceTree = "<group>"; };
+		1C810C731B04F49600DA42CF /* help@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "help@3x.png"; sourceTree = "<group>"; };
+		1C810C741B04F49600DA42CF /* status@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status@2x.png"; sourceTree = "<group>"; };
+		1C810C751B04F49600DA42CF /* status@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status@1x.png"; sourceTree = "<group>"; };
+		1C810C761B04F49600DA42CF /* status@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status@3x.png"; sourceTree = "<group>"; };
+		1C810C981B05007B00DA42CF /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		1CA9F8461ACAFB6F003588EE /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		1CA9F84A1ACB0294003588EE /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		1CB7E0901AD6C82F0080A2AB /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -103,6 +132,15 @@
 		1CB7E0A61AE04E920080A2AB /* StatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		1CB7E0A91AE153470080A2AB /* UIViewControllerUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerUtilities.swift; sourceTree = "<group>"; };
 		1CB7E0AE1AE821570080A2AB /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		1CC1D7741B051D9900D8AC67 /* bookmark_final.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = bookmark_final.mov; sourceTree = "<group>"; };
+		1CC1D7751B051D9900D8AC67 /* photo_final.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = photo_final.mov; sourceTree = "<group>"; };
+		1CC1D7761B051D9900D8AC67 /* signin_final.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = signin_final.mov; sourceTree = "<group>"; };
+		1CC1D77A1B05202B00D8AC67 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		1CC1D7931B0525DF00D8AC67 /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		1CC1D7941B0525DF00D8AC67 /* InputText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputText.swift; sourceTree = "<group>"; };
+		1CC1D7951B0525DF00D8AC67 /* Modal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Modal.swift; sourceTree = "<group>"; };
+		1CC1D7961B0525DF00D8AC67 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		1CC1D79B1B05267900D8AC67 /* SpotHelpButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotHelpButton.swift; sourceTree = "<group>"; };
 		1CC20B971AC5B5E500FD26E3 /* SpotConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpotConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CC20B9B1AC5B5E500FD26E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1CC20B9C1AC5B5E500FD26E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -126,6 +164,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CC1D77B1B05202B00D8AC67 /* AVKit.framework in Frameworks */,
 				1CB7E0931AD6C8430080A2AB /* SystemConfiguration.framework in Frameworks */,
 				1CB7E0911AD6C82F0080A2AB /* AddressBook.framework in Frameworks */,
 				1CA9F84D1ACB08DE003588EE /* Alamofire.framework in Frameworks */,
@@ -154,6 +193,12 @@
 		1C810C611B04E66D00DA42CF /* images */ = {
 			isa = PBXGroup;
 			children = (
+				1C810C711B04F49600DA42CF /* help@2x.png */,
+				1C810C721B04F49600DA42CF /* help@1x.png */,
+				1C810C731B04F49600DA42CF /* help@3x.png */,
+				1C810C741B04F49600DA42CF /* status@2x.png */,
+				1C810C751B04F49600DA42CF /* status@1x.png */,
+				1C810C761B04F49600DA42CF /* status@3x.png */,
 				1C810C651B04EB7100DA42CF /* spotconnect.png */,
 				1C810C661B04EB7100DA42CF /* spotconnect@2x.png */,
 				1C810C671B04EB7100DA42CF /* spotconnect@3x.png */,
@@ -162,9 +207,31 @@
 			path = images;
 			sourceTree = "<group>";
 		};
+		1CC1D7731B051D9900D8AC67 /* help */ = {
+			isa = PBXGroup;
+			children = (
+				1CC1D7741B051D9900D8AC67 /* bookmark_final.mov */,
+				1CC1D7751B051D9900D8AC67 /* photo_final.mov */,
+				1CC1D7761B051D9900D8AC67 /* signin_final.mov */,
+			);
+			path = help;
+			sourceTree = "<group>";
+		};
+		1CC1D7921B0525DF00D8AC67 /* FlourishUI */ = {
+			isa = PBXGroup;
+			children = (
+				1CC1D7931B0525DF00D8AC67 /* Button.swift */,
+				1CC1D7941B0525DF00D8AC67 /* InputText.swift */,
+				1CC1D7951B0525DF00D8AC67 /* Modal.swift */,
+				1CC1D7961B0525DF00D8AC67 /* UIColor.swift */,
+			);
+			path = FlourishUI;
+			sourceTree = "<group>";
+		};
 		1CC20B8E1AC5B5E500FD26E3 = {
 			isa = PBXGroup;
 			children = (
+				1CC1D77A1B05202B00D8AC67 /* AVKit.framework */,
 				1CB7E09E1AE043E70080A2AB /* SwiftyJSON.framework */,
 				1CB7E0971AD6CD4D0080A2AB /* Bridging-Header.h */,
 				1CB7E0921AD6C8430080A2AB /* SystemConfiguration.framework */,
@@ -191,21 +258,25 @@
 		1CC20B991AC5B5E500FD26E3 /* SpotConnect */ = {
 			isa = PBXGroup;
 			children = (
+				1CC1D7921B0525DF00D8AC67 /* FlourishUI */,
+				1CC1D7731B051D9900D8AC67 /* help */,
+				1C810C611B04E66D00DA42CF /* images */,
 				1CC20BD01AC5C92600FD26E3 /* SpotConnect.entitlements */,
-				1C810C5B1B024ED300DA42CF /* SpotApi.swift */,
 				1CC20B9C1AC5B5E500FD26E3 /* AppDelegate.swift */,
+				1C810C5B1B024ED300DA42CF /* SpotApi.swift */,
+				1CC1D79B1B05267900D8AC67 /* SpotHelpButton.swift */,
 				1CC20B9E1AC5B5E500FD26E3 /* LoginViewController.swift */,
+				1CB7E0A61AE04E920080A2AB /* StatusViewController.swift */,
 				1CC20BA01AC5B5E500FD26E3 /* Main.storyboard */,
 				1CC20BA31AC5B5E500FD26E3 /* Images.xcassets */,
 				1CC20BA51AC5B5E500FD26E3 /* LaunchScreen.xib */,
 				1CB7E0A01AE04C460080A2AB /* Locksmith.swift */,
 				1CB7E0A11AE04C460080A2AB /* LocksmithRequest.swift */,
-				1CB7E0A61AE04E920080A2AB /* StatusViewController.swift */,
 				1CB7E0A91AE153470080A2AB /* UIViewControllerUtilities.swift */,
-				1C810C611B04E66D00DA42CF /* images */,
 				1CC20B9A1AC5B5E500FD26E3 /* Supporting Files */,
 				1CB7E0AE1AE821570080A2AB /* Settings.bundle */,
 				1C810C5E1B029A1500DA42CF /* ProgressHUD.swift */,
+				1C810C981B05007B00DA42CF /* HelpViewController.swift */,
 			);
 			path = SpotConnect;
 			sourceTree = "<group>";
@@ -382,15 +453,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CB7E0961AD6CCB00080A2AB /* GoogleSignIn.framework in Resources */,
+				1CC1D7771B051D9900D8AC67 /* bookmark_final.mov in Resources */,
+				1C810C7F1B04F49600DA42CF /* status@1x.png in Resources */,
 				1C810C681B04EB7100DA42CF /* spotconnect.png in Resources */,
 				1CC20BA21AC5B5E500FD26E3 /* Main.storyboard in Resources */,
+				1CC1D7791B051D9900D8AC67 /* signin_final.mov in Resources */,
 				1C810C6A1B04EB7100DA42CF /* spotconnect@2x.png in Resources */,
 				1C810C6C1B04EB7100DA42CF /* spotconnect@3x.png in Resources */,
+				1C810C771B04F49600DA42CF /* help@2x.png in Resources */,
 				1CC20BA71AC5B5E500FD26E3 /* LaunchScreen.xib in Resources */,
+				1C810C791B04F49600DA42CF /* help@1x.png in Resources */,
 				1CA9F8471ACAFB6F003588EE /* Cartfile in Resources */,
 				1CB7E09B1AD70C5E0080A2AB /* GoogleSignIn.bundle in Resources */,
+				1CC1D7781B051D9900D8AC67 /* photo_final.mov in Resources */,
 				1CC20BA41AC5B5E500FD26E3 /* Images.xcassets in Resources */,
 				1C810C631B04E66D00DA42CF /* gradient4k.png in Resources */,
+				1C810C811B04F49600DA42CF /* status@3x.png in Resources */,
+				1C810C7D1B04F49600DA42CF /* status@2x.png in Resources */,
+				1C810C7B1B04F49600DA42CF /* help@3x.png in Resources */,
 				1CB7E0AF1AE821570080A2AB /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -409,13 +489,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C810C6D1B04EB7100DA42CF /* spotconnect@3x.png in Resources */,
+				1C810C821B04F49600DA42CF /* status@3x.png in Resources */,
 				1C810C641B04E66D00DA42CF /* gradient4k.png in Resources */,
+				1C810C7C1B04F49600DA42CF /* help@3x.png in Resources */,
 				1C3A58211AEA89DB0027ED94 /* SpotConnect.js in Resources */,
 				1CA9F8491ACAFB6F003588EE /* Cartfile in Resources */,
 				1C810C6B1B04EB7100DA42CF /* spotconnect@2x.png in Resources */,
+				1C810C7E1B04F49600DA42CF /* status@2x.png in Resources */,
 				1CB7E0B11AE821570080A2AB /* Settings.bundle in Resources */,
+				1C810C7A1B04F49600DA42CF /* help@1x.png in Resources */,
 				1C810C691B04EB7100DA42CF /* spotconnect.png in Resources */,
 				1CC20BC71AC5C89600FD26E3 /* MainInterface.storyboard in Resources */,
+				1C810C801B04F49600DA42CF /* status@1x.png in Resources */,
+				1C810C781B04F49600DA42CF /* help@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,13 +557,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CB7E0AD1AE540160080A2AB /* LoginViewController.swift in Sources */,
+				1CC1D79A1B0525DF00D8AC67 /* UIColor.swift in Sources */,
 				1CB7E0A71AE04E920080A2AB /* StatusViewController.swift in Sources */,
 				1C810C5F1B029A1500DA42CF /* ProgressHUD.swift in Sources */,
+				1CC1D79C1B05267900D8AC67 /* SpotHelpButton.swift in Sources */,
 				1CB7E0A41AE04C460080A2AB /* LocksmithRequest.swift in Sources */,
+				1C810C991B05007B00DA42CF /* HelpViewController.swift in Sources */,
 				1CB7E0A21AE04C460080A2AB /* Locksmith.swift in Sources */,
 				1CB7E0AA1AE153470080A2AB /* UIViewControllerUtilities.swift in Sources */,
 				1C810C5C1B024ED300DA42CF /* SpotApi.swift in Sources */,
 				1CC20B9D1AC5B5E500FD26E3 /* AppDelegate.swift in Sources */,
+				1CC1D7971B0525DF00D8AC67 /* Button.swift in Sources */,
+				1CC1D7981B0525DF00D8AC67 /* InputText.swift in Sources */,
+				1CC1D7991B0525DF00D8AC67 /* Modal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

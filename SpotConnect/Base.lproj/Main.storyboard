@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="nfB-BS-ERI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="4w5-kY-EOg">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -44,7 +45,7 @@
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="swz-8P-ihT" customClass="GIDSignInButton">
-                                        <rect key="frame" x="75" y="279" width="200" height="39"/>
+                                        <rect key="frame" x="75" y="274" width="200" height="44"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gcx-O7-Sma" userLabel="horizLine">
@@ -92,9 +93,156 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <exit id="o41-PT-FTX" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1313" y="917"/>
+            <point key="canvasLocation" x="1721" y="-113"/>
         </scene>
-        <!--Status View Controller-->
+        <!--Tab Bar Controller-->
+        <scene sceneID="iit-SK-1IN">
+            <objects>
+                <tabBarController id="4w5-kY-EOg" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="Bwe-X5-7Xk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="nfB-BS-ERI" kind="relationship" relationship="viewControllers" id="1OK-cL-2SK"/>
+                        <segue destination="QiY-Oc-aD8" kind="relationship" relationship="viewControllers" id="Wfl-Vv-LCx"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="haE-L4-oiC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="62" y="-113"/>
+        </scene>
+        <!--Help-->
+        <scene sceneID="23e-ae-SGu">
+            <objects>
+                <viewController id="QiY-Oc-aD8" customClass="HelpViewController" customModule="SpotConnect" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CVy-7P-QMN"/>
+                        <viewControllerLayoutGuide type="bottom" id="NBc-K3-XPB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SFN-YR-1Bh">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Help" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2rn-VO-og7">
+                                <rect key="frame" x="0.0" y="49" width="600" height="34"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QpC-f5-aXl" userLabel="signin_final" customClass="SpotHelpButton" customModule="SpotConnect" customModuleProvider="target">
+                                <rect key="frame" x="158" y="152" width="284" height="39"/>
+                                <color key="backgroundColor" red="0.090196078431372548" green="0.15686274509803921" blue="0.1764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="39" id="FcM-Im-VZa"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="284" id="IPc-tb-82H"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="39" id="NIR-jX-5cT"/>
+                                    <constraint firstAttribute="width" constant="284" id="TIP-v5-10g"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="1. Signing in">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="buttonCornerRadius">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="helpButtonPressed:" destination="QiY-Oc-aD8" eventType="touchUpInside" id="zVU-Mi-cG0"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="anF-gA-9qL" userLabel="bookmark_final" customClass="SpotHelpButton" customModule="SpotConnect" customModuleProvider="target">
+                                <rect key="frame" x="158" y="199" width="284" height="39"/>
+                                <color key="backgroundColor" red="0.090196078430000007" green="0.15686274510000001" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="39" id="J5r-Vx-e2F"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="284" id="P3t-vz-VwZ"/>
+                                    <constraint firstAttribute="width" constant="284" id="Vpm-k4-u2n"/>
+                                    <constraint firstAttribute="height" constant="39" id="vrP-7P-e7i"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="2. Enable &amp; post a bookmark">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="buttonCornerRadius">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="helpButtonPressed:" destination="QiY-Oc-aD8" eventType="touchUpInside" id="KL0-PQ-yJv"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lk0-20-GDg" userLabel="photo_final" customClass="SpotHelpButton" customModule="SpotConnect" customModuleProvider="target">
+                                <rect key="frame" x="158" y="246" width="284" height="39"/>
+                                <color key="backgroundColor" red="0.090196078430000007" green="0.15686274510000001" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="39" id="1fS-HU-9sY"/>
+                                    <constraint firstAttribute="width" constant="284" id="TF6-qy-f0j"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="39" id="aVR-uM-mF5"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="284" id="xsg-hD-1uI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="3. Post photos">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="buttonCornerRadius">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="helpButtonPressed:" destination="QiY-Oc-aD8" eventType="touchUpInside" id="8xT-V5-DBC"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.71186474119999998" green="0.013197967749999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.71186474119999998" green="0.013197967749999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="QpC-f5-aXl" secondAttribute="centerX" id="2HN-S9-FtJ"/>
+                            <constraint firstAttribute="centerX" secondItem="anF-gA-9qL" secondAttribute="centerX" id="6Ch-RE-DmU"/>
+                            <constraint firstItem="anF-gA-9qL" firstAttribute="top" secondItem="QpC-f5-aXl" secondAttribute="bottom" constant="8" id="AST-Vy-tj3"/>
+                            <constraint firstItem="Lk0-20-GDg" firstAttribute="top" secondItem="anF-gA-9qL" secondAttribute="bottom" constant="8" id="H8X-0Q-wM3"/>
+                            <constraint firstAttribute="centerX" secondItem="2rn-VO-og7" secondAttribute="centerX" id="KGm-pH-cKW"/>
+                            <constraint firstItem="Lk0-20-GDg" firstAttribute="top" secondItem="anF-gA-9qL" secondAttribute="bottom" constant="8" id="Xhi-lQ-GkE"/>
+                            <constraint firstAttribute="centerX" secondItem="Lk0-20-GDg" secondAttribute="centerX" id="Ybc-lm-HTH"/>
+                            <constraint firstItem="anF-gA-9qL" firstAttribute="top" secondItem="QpC-f5-aXl" secondAttribute="bottom" constant="8" id="a9g-fk-Jlz"/>
+                            <constraint firstItem="2rn-VO-og7" firstAttribute="top" secondItem="CVy-7P-QMN" secondAttribute="bottom" constant="29" id="o3K-4X-lMy"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Help" image="help@3x.png" id="KjG-ZV-FRT">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="0.61960784313725492" green="0.12156862745098039" blue="0.14509803921568629" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
+                    <connections>
+                        <outlet property="bookmark" destination="anF-gA-9qL" id="qL9-2i-LB1"/>
+                        <outlet property="photo" destination="Lk0-20-GDg" id="rUe-Cf-p70"/>
+                        <outlet property="signin" destination="QpC-f5-aXl" id="lZA-xT-aMk"/>
+                        <segue destination="kDC-mC-95R" kind="show" identifier="playVideo" id="phg-49-fb8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I6H-Qw-08B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="286" y="632"/>
+        </scene>
+        <!--AV Player View Controller-->
+        <scene sceneID="6uq-r7-F9x">
+            <objects>
+                <avPlayerViewController videoGravity="AVLayerVideoGravityResizeAspect" id="kDC-mC-95R" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gIN-n7-Txz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1005" y="599"/>
+        </scene>
+        <!--Status-->
         <scene sceneID="oO8-bR-9Ax">
             <objects>
                 <viewController id="nfB-BS-ERI" customClass="StatusViewController" customModule="SpotConnect" customModuleProvider="target" sceneMemberID="viewController">
@@ -145,19 +293,36 @@
                                     <constraint firstAttribute="bottom" secondItem="NlL-AT-pVR" secondAttribute="bottom" constant="10" id="BKr-sG-6V7"/>
                                     <constraint firstItem="NVL-fc-CUg" firstAttribute="top" secondItem="rhM-13-aWb" secondAttribute="bottom" constant="15" id="T6O-zK-X5P"/>
                                     <constraint firstItem="UwW-la-uIj" firstAttribute="top" secondItem="eSn-FB-Iqe" secondAttribute="top" constant="30" id="lEQ-bp-E74"/>
+                                    <constraint firstAttribute="centerX" secondItem="rhM-13-aWb" secondAttribute="centerX" id="oTz-Xh-UN9"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="5"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EBw-pI-2Mf">
+                                <rect key="frame" x="0.0" y="49" width="600" height="34"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.74982244320000002" green="0.015072040700000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.71186474117979803" green="0.013197967749072215" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="eSn-FB-Iqe" secondAttribute="centerX" id="7cs-gW-1uT"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="EBw-pI-2Mf" secondAttribute="trailing" constant="-16" id="9ph-2y-UUr"/>
+                            <constraint firstItem="EBw-pI-2Mf" firstAttribute="top" secondItem="ZfA-Dd-nPH" secondAttribute="bottom" constant="29" id="M3T-eE-IHf"/>
+                            <constraint firstItem="EBw-pI-2Mf" firstAttribute="leading" secondItem="Xg3-hr-BSK" secondAttribute="leadingMargin" constant="-16" id="ME7-G9-jZs"/>
                             <constraint firstAttribute="centerY" secondItem="eSn-FB-Iqe" secondAttribute="centerY" id="UbS-Bq-ZtP"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Status" image="status@3x.png" id="3bK-Hj-6Pg">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="0.62352941176470589" green="0.0" blue="0.058823529411764705" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <connections>
                         <outlet property="spotUserEmail" destination="NVL-fc-CUg" id="IAg-P0-Oww"/>
                         <outlet property="spotUserInfoContainer" destination="eSn-FB-Iqe" id="Fy5-Fh-mQR"/>
@@ -169,9 +334,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qco-84-azA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="621" y="917"/>
+            <point key="canvasLocation" x="862" y="-113"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="help@3x.png" width="75" height="75"/>
+        <image name="status@3x.png" width="75" height="75"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="CHJ-gC-QJM"/>
     </inferredMetricsTieBreakers>
