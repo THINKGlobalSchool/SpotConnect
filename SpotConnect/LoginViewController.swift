@@ -69,6 +69,15 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - Navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "unwindToStatusSegue") {
+            // Set sign out flag to perform additional tasks on sign in
+            var statusViewController: StatusViewController = segue.destinationViewController as! StatusViewController
+            statusViewController.didSignIn = true
+        }
+    }
+    
     // MARK: - GIDSignInDelegate Protocol
     func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError!) {
         // Check for error

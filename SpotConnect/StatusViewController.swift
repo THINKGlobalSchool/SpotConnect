@@ -36,7 +36,9 @@ class StatusViewController: UIViewController {
     
     let spotApi = SpotApi()
     
-    // MARK: UIViewController    
+    var didSignIn = false // Can be set by login view to signify initial sign in
+    
+    // MARK: - UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         self.twoColorLayerGradient(SpotColors.LIGHTRED, colorTwo: SpotColors.DARKRED)
@@ -44,7 +46,7 @@ class StatusViewController: UIViewController {
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-       
+
         // Make sure we've got the api key and endpoint
         if let apiKey: String = spotApi.getConfigValueForKey(SpotConfig.configurationApiKey), apiEndpoint: String = spotApi.getConfigValueForKey(SpotConfig.configurationApiEndpoint) {
             
@@ -69,6 +71,15 @@ class StatusViewController: UIViewController {
                     
                     // Populate user info
                     spotApiGetUserProfile()
+                    
+                    // If we've just signed in, automatically flip to the help tab
+                    if (self.didSignIn) {
+                        if let tabBarController = self.tabBarController as UITabBarController! {
+                            self.didSignIn = false;
+                            tabBarController.selectedIndex = 1
+                        }
+                    }
+                    
                 } else {
                     // Dictionary exists, but there is no matching key, show login
                     performSegueWithIdentifier("ShowLoginSegue", sender: self)
@@ -93,7 +104,6 @@ class StatusViewController: UIViewController {
         super.viewWillAppear(animated)
         // Do stuff before the view appears
     }
-    
     
     // MARK: - IBAction
     @IBAction func unwindToStatus(segue: UIStoryboardSegue) {
