@@ -40,7 +40,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
         
         self.twoColorLayerGradient(SpotColors.LIGHTRED, colorTwo: SpotColors.DARKRED)
 
-        if let clientId: String = spotApi.getConfigValueForKey(SpotConfig.configurationGoogleClientId) {
+        if let _: String = spotApi.getConfigValueForKey(SpotConfig.configurationGoogleClientId) {
             // Set up Google Sign In
             signIn = GIDSignIn.sharedInstance()
             signIn?.clientID = spotApi.getConfigValueForKey(SpotConfig.configurationGoogleClientId)!
@@ -73,7 +73,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "unwindToStatusSegue") {
             // Set sign out flag to perform additional tasks on sign in
-            var statusViewController: StatusViewController = segue.destinationViewController as! StatusViewController
+            let statusViewController: StatusViewController = segue.destinationViewController as! StatusViewController
             statusViewController.didSignIn = true
         }
     }
@@ -85,7 +85,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
             // Called when we're signed in
             spotApiGetGoogleToken()
         } else {
-            println(error)
+            print(error)
             // Cancelled?
         }
     }
@@ -97,35 +97,38 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
     func spotApiGetGoogleToken() {
         // Get access token from Spot
         if let userEmail = self.signIn?.currentUser.profile.email {
-            var parameters = [
+            let parameters = [
                 "email": userEmail
             ]
             
             spotApi.makePostRequest(SpotMethods.authGetGoogleToken, parameters: parameters) {
-                (request, response, data, error) in
-                
-                var json = JSON(data!)
-                
-                // Check status
-                if (json["status"] >= 0) {
-                    // Successful login, save access token in the keychaing
-                    let error = Locksmith.updateData([SpotConfig.configurationApiAccessToken: json["result"].stringValue], forUserAccount: "spotUser")
+                (response) in
+
+                if (response.result.isSuccess) {
+                    let json = JSON(response.result.value!)
                     
-                    // Check for error saving keychain data
-                    if (error == nil) {
-                        // Good to go, back to status viewcontroller
-                        self.performSegueWithIdentifier("unwindToStatusSegue", sender: self)
-                    } else {
-                        println(error)
-                        if let kError = error {
-                            if let reason = kError.localizedFailureReason {
-                                self.showMessage(kError.localizedDescription,dismiss: "Dismiss",message: reason)
+                    if (json["status"] >= 0) {
+                        // Successful login, save access token in the keychaing
+                        let error = Locksmith.updateData([SpotConfig.configurationApiAccessToken: json["result"].stringValue], forUserAccount: "spotUser")
+                        
+                        // Check for error saving keychain data
+                        if (error == nil) {
+                            // Good to go, back to status viewcontroller
+                            self.performSegueWithIdentifier("unwindToStatusSegue", sender: self)
+                        } else {
+                            print(error)
+                            if let kError = error {
+                                if let reason = kError.localizedFailureReason {
+                                    self.showMessage(kError.localizedDescription,dismiss: "Dismiss",message: reason)
+                                }
                             }
                         }
+                    } else {
+                        self.showMessage("Error", dismiss: "Dismiss", message: json["message"].stringValue)
+                        self.signIn?.disconnect() // Disconnect the user that just authorized
                     }
                 } else {
-                    self.showMessage("Error", dismiss: "Dismiss", message: json["message"].stringValue)
-                    self.signIn?.disconnect() // Disconnect the user that just authorized
+                    self.showMessage("Error", dismiss: "Dismiss", message: (response.result.error?.localizedDescription)!)
                 }
             }
         }
@@ -133,37 +136,41 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
     
     // MARK: - Actions
     @IBAction func spotSignInAction(sender: UIButton) {
-        println("Spot sign in pressed")
+        print("Spot sign in pressed")
         
         // Lets try signing in..
         let parameters = [
-            "username": self.spotUsername.text,
-            "password": self.spotPassword.text
+            "username": self.spotUsername.text!,
+            "password": self.spotPassword.text!
         ]
 
         spotApi.makePostRequest(SpotMethods.authGetToken, parameters: parameters) {
-            (request, response, data, error) in
-                if (error == nil) {
-                    var json = JSON(data!)
-                    // Check status
-                    if (json["status"] >= 0) {
-                        // Successful login, save access token in the keychaing
-                        let error = Locksmith.updateData([SpotConfig.configurationApiAccessToken: json["result"].stringValue], forUserAccount: "spotUser")
-                    
-                        // Check for error saving keychain data
-                        if (error == nil) {
-                            // Good to go, back to status viewcontroller
-                            self.performSegueWithIdentifier("unwindToStatusSegue", sender: self)
-                        } else {
-                            if let kError = error {
-                                self.showMessage(kError.localizedDescription,dismiss: "Dismiss",message: kError.localizedFailureReason!)
-                            }
-                        }
+            (response) in
+            
+            if (response.result.isSuccess) {
+                let json = JSON(response.result.value!)
+                
+                if (json["status"] >= 0) {
+                    // Successful login, save access token in the keychaing
+                    let error = Locksmith.updateData([SpotConfig.configurationApiAccessToken: json["result"].stringValue], forUserAccount: "spotUser")
+
+                    // Check for error saving keychain data
+                    if (error == nil) {
+                        // Good to go, back to status viewcontroller
+                        self.performSegueWithIdentifier("unwindToStatusSegue", sender: self)
                     } else {
-                        self.showMessage("Error", dismiss: "Dismiss", message: json["message"].stringValue)
+                        if let kError = error {
+                            self.showMessage(kError.localizedDescription,dismiss: "Dismiss",message: kError.localizedFailureReason!)
+                        }
                     }
+                } else {
+                    self.showMessage("Error", dismiss: "Dismiss", message: json["message"].stringValue)
                 }
+                
+            } else {
+                self.showMessage("Error", dismiss: "Dismiss", message: (response.result.error?.localizedDescription)!)
             }
+        }
     }
 }
 

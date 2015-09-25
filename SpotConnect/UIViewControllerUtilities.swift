@@ -34,7 +34,7 @@ extension UIViewController {
     }
     
     func showProgressHUD(label: String) ->Void {
-        var progressText = label
+        let progressText = label
         let progressHUD = ProgressHUD(text: progressText)
         self.view.addSubview(progressHUD)
         self.view.backgroundColor = UIColor(white: 1, alpha: 0.7)

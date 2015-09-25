@@ -44,7 +44,7 @@ class HelpViewController: UIViewController {
         if let helpButton: SpotHelpButton = sender as? SpotHelpButton {
             let destination = segue.destinationViewController as! AVPlayerViewController
             
-            var url = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(helpButton.videoTitle, ofType: helpButton.videoType)!)
+            let url = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(helpButton.videoTitle, ofType: helpButton.videoType)!)
 
             destination.player = AVPlayer(URL: url)
             destination.videoGravity = AVLayerVideoGravityResizeAspectFill

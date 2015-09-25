@@ -39,23 +39,34 @@ class SpotApi {
         let userDefaults = NSUserDefaults.standardUserDefaults()
         
         // Try loading the managed app config which is provided by the MDM
-        if let managedConfig: NSDictionary = userDefaults.dictionaryForKey(SpotConfig.configurationManagedKey) {
-            println("Status VC: Got managed config")
-            println(managedConfig)
-            
-            self.apiConfig[SpotConfig.configurationApiEndpoint] = managedConfig.objectForKey(SpotConfig.configurationApiEndpoint) as? String
-            
-            self.apiConfig[SpotConfig.configurationApiKey] = managedConfig.objectForKey(SpotConfig.configurationApiKey) as? String
-
-            self.apiConfig[SpotConfig.configurationGoogleClientId] = managedConfig.objectForKey(SpotConfig.configurationGoogleClientId) as? String
-            
+//        if let managedConfig: NSDictionary = userDefaults.dictionaryForKey(SpotConfig.configurationManagedKey) {
+//            print("Status VC: Got managed config")
+//            print(managedConfig)
+//            
+//            self.apiConfig[SpotConfig.configurationApiEndpoint] = managedConfig.objectForKey(SpotConfig.configurationApiEndpoint) as? String
+//            
+//            self.apiConfig[SpotConfig.configurationApiKey] = managedConfig.objectForKey(SpotConfig.configurationApiKey) as? String
+//
+//            self.apiConfig[SpotConfig.configurationGoogleClientId] = managedConfig.objectForKey(SpotConfig.configurationGoogleClientId) as? String
+//            
+//        }
+        
+        // Nope.. fall back to local plist (DEV ONLY!!!)
+        if let path = NSBundle.mainBundle().pathForResource("AppConfig", ofType: "plist") {
+            if let localConfig = NSDictionary(contentsOfFile: path) {
+                print("Login VC: Fallback to  local config")
+                print(localConfig)
+                self.apiConfig[SpotConfig.configurationApiKey] = localConfig.objectForKey(SpotConfig.configurationApiKey) as? String
+                self.apiConfig[SpotConfig.configurationApiEndpoint] = localConfig.objectForKey(SpotConfig.configurationApiEndpoint) as? String
+                self.apiConfig[SpotConfig.configurationGoogleClientId] = localConfig.objectForKey(SpotConfig.configurationGoogleClientId) as? String
+            }
         }
         
         // Set default encoding
         self.encoding = .URL
     }
     
-    // Init with api keys/values (for using without managed config, local plist)
+    // Init with api keys/values
     init(apiKey: String, apiEndpoint: String, apiAccessToken: String) {
         
         self.apiConfig[SpotConfig.configurationApiKey] = apiKey
@@ -76,19 +87,19 @@ class SpotApi {
     }
     
     // Convenience function to execute a get request
-    func makeGetRequest(call: NSString, parameters: [String: AnyObject]?, completion: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?)
+    func makeGetRequest(call: NSString, parameters: [String: AnyObject]?, completion: (Response<AnyObject, NSError>)
         -> Void) {
             self.makeRequest(.GET, call: call, parameters: parameters, completion: completion)
     }
     
     // Convenience function to execute a post request
-    func makePostRequest(call: NSString, parameters: [String: AnyObject]?, completion: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?)
+    func makePostRequest(call: NSString, parameters: [String: AnyObject]?, completion: (Response<AnyObject, NSError>)
         -> Void) {
             self.makeRequest(.POST, call: call, parameters: parameters, completion: completion)
     }
     
     // Make a generic request with givem parameters
-    func makeRequest(method: Alamofire.Method, call: NSString, parameters: [String : AnyObject]?, completion: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?)
+    func makeRequest(method: Alamofire.Method, call: NSString, parameters: [String : AnyObject]?, completion: (Response<AnyObject, NSError>)
  -> Void) {
 
         var apiParameters = self.getApiParameters()
@@ -99,26 +110,26 @@ class SpotApi {
             apiParameters.merge(params)
         }
     
-        var endpoint = self.apiConfig[SpotConfig.configurationApiEndpoint]! + (call as String)
+        let endpoint = self.apiConfig[SpotConfig.configurationApiEndpoint]! + (call as String)
         
         Alamofire.request(method, endpoint, parameters: apiParameters, encoding: self.encoding)
-            .responseJSON{ (request, response, data, error) in
+            .responseJSON{ response in
                 // This is probably less than correct.. but.
-                completion(request, response, data, error)
+                completion(response)
         }
     
     }
     
     // Perform an upload with url request
-    func uploadWithUrlRequest(urlRequest: (URLRequestConvertible, NSData), completion: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?)
+    func uploadWithUrlRequest(urlRequest: (URLRequestConvertible, NSData), completion: (Response<AnyObject, NSError>)
         -> Void) {
             
-        Alamofire.upload(urlRequest.0, urlRequest.1)
+        Alamofire.upload(urlRequest.0, data: urlRequest.1)
             .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
-                println("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
+                print("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
             }
-            .responseJSON { (request, response, data, error) in
-                completion(request, response, data, error)
+            .responseJSON { response in
+                completion(response)
             }
         
     }
@@ -129,7 +140,7 @@ class SpotApi {
     func photoUploadRequestWithComponents(call:String, parameters:[String: String]?, image: NSURL) -> (URLRequestConvertible, NSData) {
         
         // Build endpoint
-        var urlString = self.getConfigValueForKey(SpotConfig.configurationApiEndpoint)! + (call as String)
+        let urlString = self.getConfigValueForKey(SpotConfig.configurationApiEndpoint)! + (call as String)
         
         var apiParameters = self.getApiParameters()
         
@@ -138,7 +149,7 @@ class SpotApi {
         }
         
         // create url request to send
-        var mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: urlString)!)
+        let mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: urlString)!)
         mutableURLRequest.HTTPMethod = Alamofire.Method.POST.rawValue
         let boundaryConstant = "spotconnect-image-boundary";
         let contentType = "multipart/form-data;boundary="+boundaryConstant
@@ -147,14 +158,11 @@ class SpotApi {
         // create upload data to send
         let uploadData = NSMutableData()
         
-        var contentLength: Int = 0
-        
         if let imageData = NSData(contentsOfURL: image) {
             // Resolve data about this image
             let fileExt: String = image.pathExtension!
-            let filePrefix: String = image.lastPathComponent!.stringByDeletingPathExtension
+            let filePrefix: String = (image.lastPathComponent! as NSString).stringByDeletingPathExtension
             let filename = "\(filePrefix).\(fileExt)"
-            contentLength = imageData.length
             
             // add image
             uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)

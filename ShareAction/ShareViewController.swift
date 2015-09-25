@@ -44,64 +44,61 @@ class ShareViewController: SLComposeServiceViewController {
             )
             
             // Good, got a token. Let's check if we can talk to the server
-            let method = "util.ping"
-
-            
-            println("Attempting ping..")
+            print("Attempting ping..")
             
             spotApi.makeGetRequest(SpotMethods.utilPing, parameters: nil) {
-                (request, response, data, error) in
-                    if (error != nil) {
-                        if let uError = error {
-                            // Ok, had an error
-                            if let errorCode = error?.code as Int? {
-                                // Hide view and text input
-                                self.view.hidden = true
-                                self.textView.removeFromSuperview()
-
-                                var title: String = uError.localizedDescription
-                                var message: String
-                                
-                                if let reason = uError.localizedFailureReason {
-                                    message = reason
-                                } else {
-                                    message = title
-                                    title = "Error"
-                                }
-
-                                // Check error codes here
-                                switch (errorCode) {
-                                case -1003:
-                                    title = "Oops"
-                                    message = "Can't find Spot server! Check your internet connection and try again."
-                                    break
-                                default:
-                                    break
-                                }
-                                
-                                let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-                                
-                                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { action in
-                                    self.completeExtension()
-                                }))
-                                
-                                self.presentViewController(alertController, animated: true, completion: nil)
+                (response) in
+                
+                if (response.result.isFailure) {
+                    if let uError = response.result.error {
+                        // Ok, had an error
+                        if let errorCode = uError.code as Int? {
+                            // Hide view and text input
+                            self.view.hidden = true
+                            self.textView.removeFromSuperview()
+                            
+                            var title: String = uError.localizedDescription
+                            var message: String
+                            
+                            if let reason = uError.localizedFailureReason {
+                                message = reason
+                            } else {
+                                message = title
+                                title = "Error"
                             }
+                            
+                            // Check error codes here
+                            switch (errorCode) {
+                            case -1003:
+                                title = "Oops"
+                                message = "Can't find Spot server! Check your internet connection and try again."
+                                break
+                            default:
+                                break
+                            }
+                            
+                            let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                            
+                            alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { action in
+                                self.completeExtension()
+                            }))
+                            
+                            self.presentViewController(alertController, animated: true, completion: nil)
                         }
-                    } else {
-                        
-                        // Get item provider
-                        var item : NSExtensionItem = self.extensionContext?.inputItems.first as! NSExtensionItem
-                        
-                        // Got more than one, this will be fun!
-                        for provider in item.attachments! {
-                            let itemProvider = provider as! NSItemProvider
-                            self.setPostContent(itemProvider)
-                        }
-                        
-                        // No error, show the view already!
-                        self.view.hidden = false
                     }
+                } else {
+                    // Get item provider
+                    let item : NSExtensionItem = self.extensionContext?.inputItems.first as! NSExtensionItem
+                    
+                    // Got more than one, this will be fun!
+                    for provider in item.attachments! {
+                        let itemProvider = provider as! NSItemProvider
+                        self.setPostContent(itemProvider)
+                    }
+                    
+                    // No error, show the view already!
+                    self.view.hidden = false
+                }
             }
             
         } else {
@@ -131,7 +128,7 @@ class ShareViewController: SLComposeServiceViewController {
     
     func setPostContent(itemProvider: NSItemProvider) -> Void {
         // Need to figure out what we're going to be posting, this is in decending order of importance
-        var validTypes = [
+        let validTypes = [
             kUTTypePropertyList as String, // Propertly list, as returned by preprocessing JS (not currently in use)
             kUTTypeImage as String,        // public.image
             kUTTypeURL as String,          // public.url
@@ -229,7 +226,7 @@ class ShareViewController: SLComposeServiceViewController {
     
     // Post a bookmark
     func postBookmark(title: String, url: NSURL, token: NSString) -> Void {
-        var post_parameters = [
+        let post_parameters = [
             "title": title,
             "url": url.URLString,
         ]
@@ -239,50 +236,51 @@ class ShareViewController: SLComposeServiceViewController {
         var title: String = ""
         
         spotApi.makePostRequest(SpotMethods.bookmarkPost, parameters: post_parameters) {
-            (request, response, data, error) in
-                // Check for errors
-                if (error != nil) {
-                    if let uError = error {
-                        title = uError.localizedDescription
-                        
-                        if let reason = uError.localizedFailureReason {
-                            message = reason
-                        } else {
-                            message = title
-                            title = "Error"
-                        }
-                    }
-                } else {                    
-                    var json = JSON(data!)
+            (response) in
+            
+            // Check for an error first
+            if (response.result.isFailure) {
+                if let uError = response.result.error {
+                    title = uError.localizedDescription
                     
-                    // Check for an API error
-                    if (json["status"] >= 0) {
-                        // good.. show success
-                        title = "Success!"
-                        message = "Posted to Spot!"
+                    if let reason = uError.localizedFailureReason {
+                        message = reason
                     } else {
+                        message = title
                         title = "Error"
-                        message = json["message"].stringValue
                     }
                 }
-            
+            } else {
+                let json = JSON(response.result.value!)
+                
+                // Check for an API error
+                if (json["status"] >= 0) {
+                    // good.. show success
+                    title = "Success!"
+                    message = "Posted to Spot!"
+                } else {
+                    title = "Error"
+                    message = json["message"].stringValue
+
+                }
+
                 self.hideProgressHUD()
                 
-                let alertController = UIAlertController(title: title, message:
-                    message, preferredStyle: UIAlertControllerStyle.Alert)
+                let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
                 
                 alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { action in
                     self.completeExtension()
                 }))
                 
                 self.presentViewController(alertController, animated: true, completion: nil)
+            }
         }
     }
     
     // Make a wire post
     func postWire(text: String, token: NSString) -> Void {
         
-        var post_parameters = [
+        let post_parameters = [
             "text": text
         ]
         
@@ -291,10 +289,10 @@ class ShareViewController: SLComposeServiceViewController {
         var title: String = ""
         
         spotApi.makePostRequest(SpotMethods.thewirePost, parameters: post_parameters) {
-            (request, response, data, error) in
+            (response) in
                 // Check for errors
-                if (error != nil) {
-                    if let uError = error {
+                if (response.result.isFailure) {
+                    if let uError = response.result.error {
                         title = uError.localizedDescription
                         
                         if let reason = uError.localizedFailureReason {
@@ -305,7 +303,7 @@ class ShareViewController: SLComposeServiceViewController {
                         }
                     }
                 } else {
-                    var json = JSON(data!)
+                    var json = JSON(response.result.value!)
                     
                     // Check for an API error
                     if (json["status"] >= 0) {
@@ -335,10 +333,10 @@ class ShareViewController: SLComposeServiceViewController {
     // Post photos/images
     func postImages(images: [NSURL], description: String, token: NSString) -> Void {
         // Spot uses a timestamp to identify a batch before it's created
-        var batchDate = NSDate().timeIntervalSince1970
-        var batch: String = "\(batchDate)"
+        let batchDate = NSDate().timeIntervalSince1970
+        let batch: String = "\(batchDate)"
         
-        var post_parameters = [
+        let post_parameters = [
             "batch": batch,
             "album": "0", // @TODO, need to include this parameter because Elgg.
             "description": description
@@ -356,19 +354,19 @@ class ShareViewController: SLComposeServiceViewController {
             let urlRequest = spotApi.photoUploadRequestWithComponents(SpotMethods.photosPost, parameters: post_parameters, image: image)
             
             spotApi.uploadWithUrlRequest(urlRequest) {
-                (request, response, JSON, error) in
-                    if let error = error {
+                (response) in
+                    if let error = response.result.error {
                         uploadError = error
                     }
                 
-                    println(JSON)
+                    print(response.result.value)
 
                     dispatch_group_leave(uploadDispatch)
             }
         }
         
         dispatch_group_notify(uploadDispatch, dispatch_get_main_queue()) {
-            println("Requests complete.")
+            print("Requests complete.")
             
             if (uploadError != nil) {
                 let alertController = UIAlertController(title: "Uh-oh", message:
@@ -381,7 +379,7 @@ class ShareViewController: SLComposeServiceViewController {
                 self.presentViewController(alertController, animated: true, completion: nil)
                 
             } else {
-                var post_parameters = [
+                let post_parameters = [
                     "batch": batch
                 ]
                 
@@ -390,10 +388,10 @@ class ShareViewController: SLComposeServiceViewController {
                 var title: String = ""
                 
                 self.spotApi.makePostRequest(SpotMethods.photosFinalizePost, parameters: post_parameters) {
-                    (request, response, data, error) in
+                    (response) in
                         // Check for errors
-                        if (error != nil) {
-                            if let uError = error {
+                        if (response.result.isFailure) {
+                            if let uError = response.result.error {
                                 title = uError.localizedDescription
                                 
                                 if let reason = uError.localizedFailureReason {
@@ -404,7 +402,7 @@ class ShareViewController: SLComposeServiceViewController {
                                 }
                             }
                         } else {
-                            var json = JSON(data!)
+                            var json = JSON(response.result.value!)
                             
                             // Check for an API error
                             if (json["status"] >= 0) {

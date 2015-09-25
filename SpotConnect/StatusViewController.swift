@@ -23,6 +23,9 @@ class StatusViewController: UIViewController {
     // User info container (UIView)
     @IBOutlet weak var spotUserInfoContainer: UIView!
     
+    // Buttons
+    @IBOutlet weak var spotSignOutButton: UIButton!
+    
     // MARK: - Class constants/vars
     // Defaults
     let sharedDefaults = NSUserDefaults(suiteName: "group.thinkglobalschool.ExtensionSharingDefaults")
@@ -140,7 +143,7 @@ class StatusViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "ShowLoginSignoutSegue") {
             // Set sign out flag to perform additional tasks on sign out
-            var loginViewController: LoginViewController = segue.destinationViewController as! LoginViewController
+            let loginViewController: LoginViewController = segue.destinationViewController as! LoginViewController
             loginViewController.didSignOut = true
         }
     }
@@ -150,30 +153,27 @@ class StatusViewController: UIViewController {
      * Load Spot user data from the API
      */
     func spotApiGetUserProfile() -> Void {
-        if let auth_token = self.sharedDefaults?.stringForKey(SpotConfig.configurationApiAccessToken) {
-            
-            spotApi.makeGetRequest(SpotMethods.userGetProfile, parameters: nil) {
-                (request, response, data, error) in
+        spotApi.makeGetRequest(SpotMethods.userGetProfile, parameters: nil) {
+            (response) in
+
+            if (response.result.isSuccess) {
+                let json = JSON(response.result.value!)
                 
-                if (error == nil) {
-                    
-                    var json = JSON(data!)
-                    
-                    // Check status
-                    if (json["status"] >= 0) {
-                        let username = json["result"]["username"]
-                        let name = json["result"]["name"]
-                        let email = json["result"]["email"]
-                        let picture = json["result"]["picture"]
-                        
-                        self.spotRefreshUserProfile(json["result"])
-                    } else {
-                        self.showMessage("Error", dismiss: "Dismiss", message: json["message"].stringValue)
+                // Check status
+                if (json["status"] >= 0) {
+                    self.spotRefreshUserProfile(json["result"])
+                } else {
+                    switch (json["status"]) {
+                        case -20:
+                            self.showMessage("Error", dismiss: "Dismiss", message: "Incorrect login credentials. Please sign in again.")
+                        default:
+                            self.showMessage("Error", dismiss: "Dismiss", message: json["message"].stringValue)
                     }
-                    
                 }
+            } else {
+                self.showMessage("Error", dismiss: "Dismiss", message: (response.result.error?.localizedDescription)!)
             }
-       }
+        }
     }
     
     /**
@@ -181,7 +181,7 @@ class StatusViewController: UIViewController {
      */
     func spotRefreshUserProfile(json: JSON) -> Void {
         // Cache values
-        if let userEmail = self.infoCache["userEMail"], userName = self.infoCache["userName"], userUsername = self.infoCache["userUsername"] {
+        if let userEmail = self.infoCache["userEMail"], userName = self.infoCache["userName"], _ = self.infoCache["userUsername"] {
             self.spotUserName.text = userName
             self.spotUserEmail.text = userEmail
         } else {
@@ -208,7 +208,7 @@ class StatusViewController: UIViewController {
             NSURLConnection.sendAsynchronousRequest(request, queue: mainQueue, completionHandler: { (response, data, error) -> Void in
                 if error == nil {
                     // Convert the downloaded data in to a UIImage object
-                    let image = UIImage(data: data)
+                    let image = UIImage(data: data!)
                     // Store the image in to our cache
                     self.imageCache["userPicture"] = image
                     // Update the cell
@@ -217,7 +217,7 @@ class StatusViewController: UIViewController {
                     })
                 }
                 else {
-                    println("Error: \(error.localizedDescription)")
+                    print("Error: \(error!.localizedDescription)")
                 }
             })
         }

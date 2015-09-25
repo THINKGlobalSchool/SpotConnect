@@ -25,10 +25,10 @@ public enum Accessible: Int {
     WhenUnlockedThisDeviceOnly, AfterFirstUnlockThisDeviceOnly, AlwaysThisDeviceOnly
 }
 
-public class LocksmithRequest: NSObject, DebugPrintable {
+public class LocksmithRequest: NSObject, CustomDebugStringConvertible {
     // Keychain Options
     // Required
-    public var service: String = NSBundle.mainBundle().infoDictionary![kCFBundleIdentifierKey] as! String // Default to Bundle Identifier
+    public var service: String = NSBundle.mainBundle().infoDictionary![kCFBundleIdentifierKey as String] as! String // Default to Bundle Identifier
     public var userAccount: String
     public var type: RequestType = .Read  // Default to non-destructive
     

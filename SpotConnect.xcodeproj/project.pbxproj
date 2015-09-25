@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1C3A58211AEA89DB0027ED94 /* SpotConnect.js in Resources */ = {isa = PBXBuildFile; fileRef = 1C3A58201AEA89DB0027ED94 /* SpotConnect.js */; };
+		1C441E691BB47DB000A3D483 /* AppConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C441E681BB47DB000A3D483 /* AppConfig.plist */; settings = {ASSET_TAGS = (); }; };
 		1C810C5C1B024ED300DA42CF /* SpotApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C810C5B1B024ED300DA42CF /* SpotApi.swift */; };
 		1C810C5D1B024ED300DA42CF /* SpotApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C810C5B1B024ED300DA42CF /* SpotApi.swift */; };
 		1C810C5F1B029A1500DA42CF /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C810C5E1B029A1500DA42CF /* ProgressHUD.swift */; };
@@ -106,6 +107,7 @@
 
 /* Begin PBXFileReference section */
 		1C3A58201AEA89DB0027ED94 /* SpotConnect.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = SpotConnect.js; sourceTree = "<group>"; };
+		1C441E681BB47DB000A3D483 /* AppConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfig.plist; sourceTree = "<group>"; };
 		1C810C5B1B024ED300DA42CF /* SpotApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotApi.swift; sourceTree = "<group>"; };
 		1C810C5E1B029A1500DA42CF /* ProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressHUD.swift; sourceTree = "<group>"; };
 		1C810C621B04E66D00DA42CF /* gradient4k.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradient4k.png; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 				1C810C611B04E66D00DA42CF /* images */,
 				1CC20BD01AC5C92600FD26E3 /* SpotConnect.entitlements */,
 				1CC20B9C1AC5B5E500FD26E3 /* AppDelegate.swift */,
+				1C441E681BB47DB000A3D483 /* AppConfig.plist */,
 				1C810C5B1B024ED300DA42CF /* SpotApi.swift */,
 				1CC1D79B1B05267900D8AC67 /* SpotHelpButton.swift */,
 				1CC20B9E1AC5B5E500FD26E3 /* LoginViewController.swift */,
@@ -394,7 +397,9 @@
 		1CC20B8F1AC5B5E500FD26E3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0620;
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Jeff Tilson";
 				TargetAttributes = {
 					1CC20B961AC5B5E500FD26E3 = {
@@ -455,6 +460,7 @@
 				1CB7E0961AD6CCB00080A2AB /* GoogleSignIn.framework in Resources */,
 				1CC1D7771B051D9900D8AC67 /* bookmark_final.mov in Resources */,
 				1C810C7F1B04F49600DA42CF /* status@1x.png in Resources */,
+				1C441E691BB47DB000A3D483 /* AppConfig.plist in Resources */,
 				1C810C681B04EB7100DA42CF /* spotconnect.png in Resources */,
 				1CC20BA21AC5B5E500FD26E3 /* Main.storyboard in Resources */,
 				1CC1D7791B051D9900D8AC67 /* signin_final.mov in Resources */,
@@ -646,9 +652,12 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jeff Tilson (6QWGGJXLEV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -689,8 +698,10 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jeff Tilson (6QWGGJXLEV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -725,6 +736,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.thinkglobalschool.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
@@ -736,7 +748,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SpotConnect/SpotConnect.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -748,6 +760,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.thinkglobalschool.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
@@ -768,6 +781,7 @@
 				);
 				INFOPLIST_FILE = SpotConnectTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.thinkglobalschool.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpotConnect.app/SpotConnect";
 			};
@@ -783,6 +797,7 @@
 				);
 				INFOPLIST_FILE = SpotConnectTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.thinkglobalschool.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpotConnect.app/SpotConnect";
 			};
@@ -804,6 +819,7 @@
 				);
 				INFOPLIST_FILE = ShareAction/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.thinkglobalschool.SpotConnect.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -822,6 +838,7 @@
 				);
 				INFOPLIST_FILE = ShareAction/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.thinkglobalschool.SpotConnect.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;

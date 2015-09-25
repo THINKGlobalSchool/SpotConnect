@@ -1,3 +1,2 @@
-github "Alamofire/Alamofire" "1.2.0"
-github "matthewpalmer/Locksmith" "1.2.1"
-github "SwiftyJSON/SwiftyJSON" "2.2.0"
+github "Alamofire/Alamofire" "b65a82f1a0fa479264a2e81c8df7d10a7f6b948b"
+github "SwiftyJSON/SwiftyJSON" "2.3.0"
