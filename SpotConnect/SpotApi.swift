@@ -39,28 +39,28 @@ class SpotApi {
         let userDefaults = NSUserDefaults.standardUserDefaults()
         
         // Try loading the managed app config which is provided by the MDM
-//        if let managedConfig: NSDictionary = userDefaults.dictionaryForKey(SpotConfig.configurationManagedKey) {
-//            print("Status VC: Got managed config")
-//            print(managedConfig)
-//            
-//            self.apiConfig[SpotConfig.configurationApiEndpoint] = managedConfig.objectForKey(SpotConfig.configurationApiEndpoint) as? String
-//            
-//            self.apiConfig[SpotConfig.configurationApiKey] = managedConfig.objectForKey(SpotConfig.configurationApiKey) as? String
-//
-//            self.apiConfig[SpotConfig.configurationGoogleClientId] = managedConfig.objectForKey(SpotConfig.configurationGoogleClientId) as? String
-//            
-//        }
-        
-        // Nope.. fall back to local plist (DEV ONLY!!!)
-        if let path = NSBundle.mainBundle().pathForResource("AppConfig", ofType: "plist") {
-            if let localConfig = NSDictionary(contentsOfFile: path) {
-                print("Login VC: Fallback to  local config")
-                print(localConfig)
-                self.apiConfig[SpotConfig.configurationApiKey] = localConfig.objectForKey(SpotConfig.configurationApiKey) as? String
-                self.apiConfig[SpotConfig.configurationApiEndpoint] = localConfig.objectForKey(SpotConfig.configurationApiEndpoint) as? String
-                self.apiConfig[SpotConfig.configurationGoogleClientId] = localConfig.objectForKey(SpotConfig.configurationGoogleClientId) as? String
-            }
+        if let managedConfig: NSDictionary = userDefaults.dictionaryForKey(SpotConfig.configurationManagedKey) {
+            print("Status VC: Got managed config")
+            print(managedConfig)
+            
+            self.apiConfig[SpotConfig.configurationApiEndpoint] = managedConfig.objectForKey(SpotConfig.configurationApiEndpoint) as? String
+            
+            self.apiConfig[SpotConfig.configurationApiKey] = managedConfig.objectForKey(SpotConfig.configurationApiKey) as? String
+
+            self.apiConfig[SpotConfig.configurationGoogleClientId] = managedConfig.objectForKey(SpotConfig.configurationGoogleClientId) as? String
+            
         }
+        
+//        // Nope.. fall back to local plist (DEV ONLY!!!)
+//        if let path = NSBundle.mainBundle().pathForResource("AppConfig", ofType: "plist") {
+//            if let localConfig = NSDictionary(contentsOfFile: path) {
+//                print("Login VC: Fallback to  local config")
+//                print(localConfig)
+//                self.apiConfig[SpotConfig.configurationApiKey] = localConfig.objectForKey(SpotConfig.configurationApiKey) as? String
+//                self.apiConfig[SpotConfig.configurationApiEndpoint] = localConfig.objectForKey(SpotConfig.configurationApiEndpoint) as? String
+//                self.apiConfig[SpotConfig.configurationGoogleClientId] = localConfig.objectForKey(SpotConfig.configurationGoogleClientId) as? String
+//            }
+//        }
         
         // Set default encoding
         self.encoding = .URL

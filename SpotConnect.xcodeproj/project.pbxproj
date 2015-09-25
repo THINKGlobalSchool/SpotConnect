@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1C3A58211AEA89DB0027ED94 /* SpotConnect.js in Resources */ = {isa = PBXBuildFile; fileRef = 1C3A58201AEA89DB0027ED94 /* SpotConnect.js */; };
-		1C441E691BB47DB000A3D483 /* AppConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C441E681BB47DB000A3D483 /* AppConfig.plist */; settings = {ASSET_TAGS = (); }; };
 		1C810C5C1B024ED300DA42CF /* SpotApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C810C5B1B024ED300DA42CF /* SpotApi.swift */; };
 		1C810C5D1B024ED300DA42CF /* SpotApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C810C5B1B024ED300DA42CF /* SpotApi.swift */; };
 		1C810C5F1B029A1500DA42CF /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C810C5E1B029A1500DA42CF /* ProgressHUD.swift */; };
@@ -107,7 +106,6 @@
 
 /* Begin PBXFileReference section */
 		1C3A58201AEA89DB0027ED94 /* SpotConnect.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = SpotConnect.js; sourceTree = "<group>"; };
-		1C441E681BB47DB000A3D483 /* AppConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfig.plist; sourceTree = "<group>"; };
 		1C810C5B1B024ED300DA42CF /* SpotApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotApi.swift; sourceTree = "<group>"; };
 		1C810C5E1B029A1500DA42CF /* ProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressHUD.swift; sourceTree = "<group>"; };
 		1C810C621B04E66D00DA42CF /* gradient4k.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradient4k.png; sourceTree = "<group>"; };
@@ -265,7 +263,6 @@
 				1C810C611B04E66D00DA42CF /* images */,
 				1CC20BD01AC5C92600FD26E3 /* SpotConnect.entitlements */,
 				1CC20B9C1AC5B5E500FD26E3 /* AppDelegate.swift */,
-				1C441E681BB47DB000A3D483 /* AppConfig.plist */,
 				1C810C5B1B024ED300DA42CF /* SpotApi.swift */,
 				1CC1D79B1B05267900D8AC67 /* SpotHelpButton.swift */,
 				1CC20B9E1AC5B5E500FD26E3 /* LoginViewController.swift */,
@@ -460,7 +457,6 @@
 				1CB7E0961AD6CCB00080A2AB /* GoogleSignIn.framework in Resources */,
 				1CC1D7771B051D9900D8AC67 /* bookmark_final.mov in Resources */,
 				1C810C7F1B04F49600DA42CF /* status@1x.png in Resources */,
-				1C441E691BB47DB000A3D483 /* AppConfig.plist in Resources */,
 				1C810C681B04EB7100DA42CF /* spotconnect.png in Resources */,
 				1CC20BA21AC5B5E500FD26E3 /* Main.storyboard in Resources */,
 				1CC1D7791B051D9900D8AC67 /* signin_final.mov in Resources */,
