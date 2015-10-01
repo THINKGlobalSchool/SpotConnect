@@ -28,6 +28,7 @@ struct SpotMethods {
     static var thewirePost: String = "thewire.post"
     static var photosPost: String = "photos.post"
     static var photosFinalizePost: String = "photos.finalize.post"
+    static var albumsList: String = "albums.list"
 }
 
 class SpotApi {
@@ -110,6 +111,8 @@ class SpotApi {
             apiParameters.merge(params)
         }
     
+        print(apiParameters)
+
         let endpoint = self.apiConfig[SpotConfig.configurationApiEndpoint]! + (call as String)
         
         Alamofire.request(method, endpoint, parameters: apiParameters, encoding: self.encoding)

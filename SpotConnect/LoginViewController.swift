@@ -119,16 +119,16 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
                             print(error)
                             if let kError = error {
                                 if let reason = kError.localizedFailureReason {
-                                    self.showMessage(kError.localizedDescription,dismiss: "Dismiss",message: reason)
+                                    self.showMessage(kError.localizedDescription,dismiss: "Dismiss",message: reason, handler: nil)
                                 }
                             }
                         }
                     } else {
-                        self.showMessage("Error", dismiss: "Dismiss", message: json["message"].stringValue)
+                        self.showMessage("Error", dismiss: "Dismiss", message: json["message"].stringValue, handler: nil)
                         self.signIn?.disconnect() // Disconnect the user that just authorized
                     }
                 } else {
-                    self.showMessage("Error", dismiss: "Dismiss", message: (response.result.error?.localizedDescription)!)
+                    self.showMessage("Error", dismiss: "Dismiss", message: (response.result.error?.localizedDescription)!, handler: nil)
                 }
             }
         }
@@ -160,15 +160,15 @@ class LoginViewController: UIViewController, GIDSignInDelegate {
                         self.performSegueWithIdentifier("unwindToStatusSegue", sender: self)
                     } else {
                         if let kError = error {
-                            self.showMessage(kError.localizedDescription,dismiss: "Dismiss",message: kError.localizedFailureReason!)
+                            self.showMessage(kError.localizedDescription,dismiss: "Dismiss",message: kError.localizedFailureReason!, handler: nil)
                         }
                     }
                 } else {
-                    self.showMessage("Error", dismiss: "Dismiss", message: json["message"].stringValue)
+                    self.showMessage("Error", dismiss: "Dismiss", message: json["message"].stringValue, handler: nil)
                 }
                 
             } else {
-                self.showMessage("Error", dismiss: "Dismiss", message: (response.result.error?.localizedDescription)!)
+                self.showMessage("Error", dismiss: "Dismiss", message: (response.result.error?.localizedDescription)!, handler: nil)
             }
         }
     }

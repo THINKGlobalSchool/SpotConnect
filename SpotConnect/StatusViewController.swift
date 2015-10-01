@@ -114,6 +114,25 @@ class StatusViewController: UIViewController {
     }
 
     @IBAction func spotSignOutAction(sender: UIButton) {
+        self.spotSignOut()
+    }
+    
+    // MARK: - Navigation
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "ShowLoginSignoutSegue") {
+            // Set sign out flag to perform additional tasks on sign out
+            let loginViewController: LoginViewController = segue.destinationViewController as! LoginViewController
+            loginViewController.didSignOut = true
+        }
+    }
+    
+    // MARK: - Helpers
+    
+    /**
+      * Re-usable sign out
+      */
+    func spotSignOut() {
         // Delete the stored user token
         let error = Locksmith.deleteDataForUserAccount("spotUser")
         
@@ -128,27 +147,18 @@ class StatusViewController: UIViewController {
             self.infoCache["userName"] = nil
             self.infoCache["userEmail"] = nil
             self.infoCache["userUsername"] = nil
-
+            
             // Ok, access token removed. Show login again
             performSegueWithIdentifier("ShowLoginSignoutSegue", sender: self)
         } else {
             if let kError = error {
-                self.showMessage(kError.localizedDescription,dismiss: "Dismiss",message: kError.localizedFailureReason!)
+                self.showMessage(kError.localizedDescription,dismiss: "Dismiss",message: kError.localizedFailureReason!, handler: nil)
             }
         }
+
     }
     
-    // MARK: - Navigation
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "ShowLoginSignoutSegue") {
-            // Set sign out flag to perform additional tasks on sign out
-            let loginViewController: LoginViewController = segue.destinationViewController as! LoginViewController
-            loginViewController.didSignOut = true
-        }
-    }
     
-    // MARK: - Helpers
     /**
      * Load Spot user data from the API
      */
@@ -165,13 +175,16 @@ class StatusViewController: UIViewController {
                 } else {
                     switch (json["status"]) {
                         case -20:
-                            self.showMessage("Error", dismiss: "Dismiss", message: "Incorrect login credentials. Please sign in again.")
+                            self.showMessage("Error", dismiss: "Ok", message: "Incorrect login credentials. Please sign in again.", handler: { (alertAction) -> Void in
+                                // Sign out automatically when use hits 'ok'
+                                self.spotSignOut()
+                            })
                         default:
-                            self.showMessage("Error", dismiss: "Dismiss", message: json["message"].stringValue)
+                            self.showMessage("Error", dismiss: "Dismiss", message: json["message"].stringValue, handler: nil)
                     }
                 }
             } else {
-                self.showMessage("Error", dismiss: "Dismiss", message: (response.result.error?.localizedDescription)!)
+                self.showMessage("Error", dismiss: "Dismiss", message: (response.result.error?.localizedDescription)!, handler: nil)
             }
         }
     }

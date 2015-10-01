@@ -33,8 +33,8 @@ public class Locksmith: NSObject {
             status = SecItemDelete(requestReference)
         case .Update:
             status =  Locksmith.performUpdate(requestReference, result: &result)
-        default:
-            status = nil
+//        default:
+//            status = nil
         }
         
         if let status = status {
@@ -219,8 +219,8 @@ public class Locksmith: NSObject {
             return kSecClassInternetPassword
         case .Key:
             return kSecClassKey
-        default:
-            return kSecClassGenericPassword
+//        default:
+//            return kSecClassGenericPassword
         }
     }
     

@@ -12,18 +12,25 @@ import Alamofire
 import SwiftyJSON
 import MobileCoreServices
 
-class ShareViewController: SLComposeServiceViewController {
+class ShareViewController: SLComposeServiceViewController, TagInputViewControllerDelegate, AlbumListViewControllerDelegate {
     
     // MARK: - Class constants/vars
     var spotApi: SpotApi!
     
     let sharedDefaults = NSUserDefaults(suiteName: "group.thinkglobalschool.ExtensionSharingDefaults")
+    
+    var postContentLoaded: Bool = false
 
     // Items that can be shared
     var postUrl: NSURL?
     var postText: String?
     var postError: NSError?
     var postImages: [NSURL] = []
+    
+    // Add additional items
+    var postTags: SLComposeSheetConfigurationItem!
+    var postAlbum: SLComposeSheetConfigurationItem!
+    var postAlbumGuid: String!
     
     // MARK: - SLComposeServiceViewController
     
@@ -32,6 +39,15 @@ class ShareViewController: SLComposeServiceViewController {
         super.viewDidLoad()
         
         self.view.hidden = true
+
+        // Get item provider
+        let item : NSExtensionItem = self.extensionContext?.inputItems.first as! NSExtensionItem
+        
+        // Process attachments from item provider
+        for provider in item.attachments! {
+            let itemProvider = provider as! NSItemProvider
+            self.setPostContent(itemProvider)
+        }
 
         // Check for access token
         if let accessToken = self.sharedDefaults?.objectForKey(SpotConfig.configurationApiAccessToken) as? NSString {
@@ -87,15 +103,6 @@ class ShareViewController: SLComposeServiceViewController {
                         }
                     }
                 } else {
-                    // Get item provider
-                    let item : NSExtensionItem = self.extensionContext?.inputItems.first as! NSExtensionItem
-                    
-                    // Got more than one, this will be fun!
-                    for provider in item.attachments! {
-                        let itemProvider = provider as! NSItemProvider
-                        self.setPostContent(itemProvider)
-                    }
-                    
                     // No error, show the view already!
                     self.view.hidden = false
                 }
@@ -115,18 +122,52 @@ class ShareViewController: SLComposeServiceViewController {
             self.presentViewController(alertController, animated: true, completion: nil)
         }
     }
+
+    // Adds additonal configuration items
+    override func configurationItems() -> [AnyObject]! {
+        // Add configuration items based on content being shared
+        if (self.postImages.count >= 1) {
+            
+            self.postTags = SLComposeSheetConfigurationItem()
+            self.postAlbum = SLComposeSheetConfigurationItem()
+            
+            postTags.title = "Tags"
+            postTags.value = ""
+            
+            postAlbum.title = "Album"
+            postAlbum.value = "Mobile Uploads"
+            
+            postTags.tapHandler = {() -> Void in
+                let tagInput: TagInputViewController = self.storyboard?.instantiateViewControllerWithIdentifier("tagInputVC") as! TagInputViewController
+                tagInput.delegate = self
+                tagInput.initialTagString = self.postTags.value
+                
+                self.pushConfigurationViewController(tagInput)
+            }
+            
+            postAlbum.tapHandler = {() -> Void in
+                let albumInput: AlbumListViewController = AlbumListViewController(style: UITableViewStyle.Plain)
+                albumInput.delegate = self
+                albumInput.spotApi = self.spotApi
+                self.pushConfigurationViewController(albumInput)
+            }
+            
+            return [self.postTags, self.postAlbum]
+        } else {
+            return []
+        }
+    }
     
     // Do validation of contentText and/or NSExtensionContext attachments here
     override func isContentValid() -> Bool {
         return true
     }
 
-    // Called when the view is finished presenting
-    override func presentationAnimationDidFinish() {
-     //
-    }
-    
+    /**
+      * Set the post content based on content type
+      */
     func setPostContent(itemProvider: NSItemProvider) -> Void {
+        print("setPostContent")
         // Need to figure out what we're going to be posting, this is in decending order of importance
         let validTypes = [
             kUTTypePropertyList as String, // Propertly list, as returned by preprocessing JS (not currently in use)
@@ -162,6 +203,8 @@ class ShareViewController: SLComposeServiceViewController {
                 })
             }
         }
+        
+        
     }
 
     // This is called after the user selects Post. Do the upload of contentText and/or NSExtensionContext attachments.
@@ -203,18 +246,22 @@ class ShareViewController: SLComposeServiceViewController {
             
             
             // Create and add the view to the screen.
-//            var progressText = "Posting"
-//            let progressHUD = ProgressHUD(text: progressText)
-//            self.view.addSubview(progressHUD)
-//            self.view.backgroundColor = UIColor(white: 1, alpha: 0.7)
-            
             self.showProgressHUD("Posting")
         }
     }
     
-    // To add configuration options via table cells at the bottom of the sheet, return an array of SLComposeSheetConfigurationItem here.
-    override func configurationItems() -> [AnyObject]! {
-        return []
+    // MARK: - TagInputViewControllerDelegate
+    
+    // Set the postTags value to the the string returned by the tag input view controller
+    func tagInputCompleted(textValue: String) {
+        self.postTags.value = textValue
+    }
+    
+    // MARK: - AlbumListViewControllerDelegate
+    func albumInputCompleted(titleString: String, guidString: String) {
+        self.popConfigurationViewController()
+        self.postAlbum.value = titleString
+        self.postAlbumGuid = guidString
     }
     
     // MARK: - Helpers
@@ -336,10 +383,18 @@ class ShareViewController: SLComposeServiceViewController {
         let batchDate = NSDate().timeIntervalSince1970
         let batch: String = "\(batchDate)"
         
+        var albumGuid = "0"
+        
+        // Check and see if we've selected an album guid
+        if let selectedAlbumGuid = self.postAlbumGuid {
+            albumGuid = selectedAlbumGuid
+        }
+        
         let post_parameters = [
             "batch": batch,
-            "album": "0", // @TODO, need to include this parameter because Elgg.
-            "description": description
+            "album": albumGuid,
+            "description": description,
+            "tags": self.postTags.value!
         ]
         
         // Dispatch group for multiple uploads
@@ -379,8 +434,10 @@ class ShareViewController: SLComposeServiceViewController {
                 self.presentViewController(alertController, animated: true, completion: nil)
                 
             } else {
+
                 let post_parameters = [
-                    "batch": batch
+                    "batch": batch,
+                    "album": albumGuid
                 ]
                 
                 // Success/Error messages

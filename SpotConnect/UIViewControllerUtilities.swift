@@ -17,11 +17,13 @@ struct SpotColors {
 extension UIViewController {
 
     // Show a message with a dismiss action
-    func showMessage(title: NSString, dismiss: NSString, message: NSString) {
+    func showMessage(title: NSString, dismiss: NSString, message: NSString, handler: (() -> Void)?) {
         let alertController = UIAlertController(title: title.description, message:
             message.description, preferredStyle: UIAlertControllerStyle.Alert)
         
-        alertController.addAction(UIAlertAction(title: dismiss.description, style: UIAlertActionStyle.Default,handler: nil))
+        alertController.addAction(UIAlertAction(title: dismiss.description, style: UIAlertActionStyle.Default,  handler: { (action) -> Void in
+            handler?()
+        }))
         
         self.presentViewController(alertController, animated: true, completion: nil)
     }

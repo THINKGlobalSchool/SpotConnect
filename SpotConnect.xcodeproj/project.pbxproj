@@ -37,6 +37,9 @@
 		1CA9F8481ACAFB6F003588EE /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 1CA9F8461ACAFB6F003588EE /* Cartfile */; };
 		1CA9F8491ACAFB6F003588EE /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 1CA9F8461ACAFB6F003588EE /* Cartfile */; };
 		1CA9F84D1ACB08DE003588EE /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA9F84A1ACB0294003588EE /* Alamofire.framework */; };
+		1CB667E31BBAE0A10005BECA /* TagInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB667E21BBAE0A10005BECA /* TagInputViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		1CB667E81BBB0AE90005BECA /* TLTagsControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB667E71BBB0AE90005BECA /* TLTagsControl.m */; settings = {ASSET_TAGS = (); }; };
+		1CB667E91BBB0AE90005BECA /* TLTagsControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB667E71BBB0AE90005BECA /* TLTagsControl.m */; settings = {ASSET_TAGS = (); }; };
 		1CB7E0911AD6C82F0080A2AB /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CB7E0901AD6C82F0080A2AB /* AddressBook.framework */; };
 		1CB7E0931AD6C8430080A2AB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CB7E0921AD6C8430080A2AB /* SystemConfiguration.framework */; };
 		1CB7E0951AD6C8AE0080A2AB /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CB7E0941AD6C8AE0080A2AB /* GoogleSignIn.framework */; };
@@ -54,6 +57,7 @@
 		1CB7E0AF1AE821570080A2AB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1CB7E0AE1AE821570080A2AB /* Settings.bundle */; };
 		1CB7E0B01AE821570080A2AB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1CB7E0AE1AE821570080A2AB /* Settings.bundle */; };
 		1CB7E0B11AE821570080A2AB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1CB7E0AE1AE821570080A2AB /* Settings.bundle */; };
+		1CB8AB891BBC24D100100733 /* AlbumListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB8AB881BBC24D100100733 /* AlbumListViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		1CC1D7771B051D9900D8AC67 /* bookmark_final.mov in Resources */ = {isa = PBXBuildFile; fileRef = 1CC1D7741B051D9900D8AC67 /* bookmark_final.mov */; };
 		1CC1D7781B051D9900D8AC67 /* photo_final.mov in Resources */ = {isa = PBXBuildFile; fileRef = 1CC1D7751B051D9900D8AC67 /* photo_final.mov */; };
 		1CC1D7791B051D9900D8AC67 /* signin_final.mov in Resources */ = {isa = PBXBuildFile; fileRef = 1CC1D7761B051D9900D8AC67 /* signin_final.mov */; };
@@ -121,6 +125,10 @@
 		1C810C981B05007B00DA42CF /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		1CA9F8461ACAFB6F003588EE /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		1CA9F84A1ACB0294003588EE /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		1CB667E21BBAE0A10005BECA /* TagInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagInputViewController.swift; sourceTree = "<group>"; };
+		1CB667E51BBB0ACD0005BECA /* TLTagsControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLTagsControl.h; sourceTree = "<group>"; };
+		1CB667E71BBB0AE90005BECA /* TLTagsControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLTagsControl.m; sourceTree = "<group>"; };
+		1CB667EA1BBB0B760005BECA /* ShareAction-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ShareAction-Bridging-Header.h"; sourceTree = "<group>"; };
 		1CB7E0901AD6C82F0080A2AB /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		1CB7E0921AD6C8430080A2AB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		1CB7E0941AD6C8AE0080A2AB /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignIn.framework; sourceTree = "<group>"; };
@@ -132,6 +140,7 @@
 		1CB7E0A61AE04E920080A2AB /* StatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		1CB7E0A91AE153470080A2AB /* UIViewControllerUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerUtilities.swift; sourceTree = "<group>"; };
 		1CB7E0AE1AE821570080A2AB /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		1CB8AB881BBC24D100100733 /* AlbumListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumListViewController.swift; sourceTree = "<group>"; };
 		1CC1D7741B051D9900D8AC67 /* bookmark_final.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = bookmark_final.mov; sourceTree = "<group>"; };
 		1CC1D7751B051D9900D8AC67 /* photo_final.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = photo_final.mov; sourceTree = "<group>"; };
 		1CC1D7761B051D9900D8AC67 /* signin_final.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = signin_final.mov; sourceTree = "<group>"; };
@@ -207,6 +216,16 @@
 			path = images;
 			sourceTree = "<group>";
 		};
+		1CB667E41BBB0A870005BECA /* TLTagsControl */ = {
+			isa = PBXGroup;
+			children = (
+				1CB667E51BBB0ACD0005BECA /* TLTagsControl.h */,
+				1CB667E71BBB0AE90005BECA /* TLTagsControl.m */,
+				1CB667EA1BBB0B760005BECA /* ShareAction-Bridging-Header.h */,
+			);
+			name = TLTagsControl;
+			sourceTree = "<group>";
+		};
 		1CC1D7731B051D9900D8AC67 /* help */ = {
 			isa = PBXGroup;
 			children = (
@@ -231,6 +250,7 @@
 		1CC20B8E1AC5B5E500FD26E3 = {
 			isa = PBXGroup;
 			children = (
+				1CB667E41BBB0A870005BECA /* TLTagsControl */,
 				1CC1D77A1B05202B00D8AC67 /* AVKit.framework */,
 				1CB7E09E1AE043E70080A2AB /* SwiftyJSON.framework */,
 				1CB7E0971AD6CD4D0080A2AB /* Bridging-Header.h */,
@@ -311,9 +331,11 @@
 		1CC20BC11AC5C89600FD26E3 /* ShareAction */ = {
 			isa = PBXGroup;
 			children = (
+				1CB8AB881BBC24D100100733 /* AlbumListViewController.swift */,
 				1CC20BCF1AC5C8E700FD26E3 /* ShareAction.entitlements */,
 				1CC20BC41AC5C89600FD26E3 /* ShareViewController.swift */,
 				1CC20BC61AC5C89600FD26E3 /* MainInterface.storyboard */,
+				1CB667E21BBAE0A10005BECA /* TagInputViewController.swift */,
 				1CC20BC21AC5C89600FD26E3 /* Supporting Files */,
 			);
 			path = ShareAction;
@@ -558,6 +580,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CB667E81BBB0AE90005BECA /* TLTagsControl.m in Sources */,
 				1CB7E0AD1AE540160080A2AB /* LoginViewController.swift in Sources */,
 				1CC1D79A1B0525DF00D8AC67 /* UIColor.swift in Sources */,
 				1CB7E0A71AE04E920080A2AB /* StatusViewController.swift in Sources */,
@@ -589,10 +612,13 @@
 			files = (
 				1CB7E0A31AE04C460080A2AB /* Locksmith.swift in Sources */,
 				1CB7E0A51AE04C460080A2AB /* LocksmithRequest.swift in Sources */,
+				1CB667E91BBB0AE90005BECA /* TLTagsControl.m in Sources */,
 				1C810C601B029A1500DA42CF /* ProgressHUD.swift in Sources */,
 				1CB7E0AB1AE153470080A2AB /* UIViewControllerUtilities.swift in Sources */,
 				1C810C5D1B024ED300DA42CF /* SpotApi.swift in Sources */,
 				1CC20BC51AC5C89600FD26E3 /* ShareViewController.swift in Sources */,
+				1CB8AB891BBC24D100100733 /* AlbumListViewController.swift in Sources */,
+				1CB667E31BBAE0A10005BECA /* TagInputViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -648,8 +674,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jeff Tilson (6QWGGJXLEV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: jtilson@thinkglobalschool.com (H48R5MD4NU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: jtilson@thinkglobalschool.com (H48R5MD4NU)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -671,6 +697,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -694,8 +721,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jeff Tilson (6QWGGJXLEV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: TGS-Think Global School, Inc.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: TGS-Think Global School, Inc.";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -709,6 +736,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -720,8 +748,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SpotConnect/SpotConnect.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -734,7 +762,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.thinkglobalschool.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "58e735c2-88a9-49f3-9b1c-4f2e95d00f7f";
 				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
 			};
 			name = Debug;
@@ -744,8 +772,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SpotConnect/SpotConnect.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -758,7 +786,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.thinkglobalschool.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "58e735c2-88a9-49f3-9b1c-4f2e95d00f7f";
 				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
 			};
 			name = Release;
@@ -802,9 +830,10 @@
 		1CC20BCC1AC5C89600FD26E3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ShareAction/ShareAction.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -817,17 +846,20 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.thinkglobalschool.SpotConnect.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "9dcac1e8-f2b8-4efc-994d-0c24d5d85392";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "ShareAction-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		1CC20BCD1AC5C89600FD26E3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ShareAction/ShareAction.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -836,8 +868,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.thinkglobalschool.SpotConnect.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "9dcac1e8-f2b8-4efc-994d-0c24d5d85392";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "ShareAction-Bridging-Header.h";
 			};
 			name = Release;
 		};
